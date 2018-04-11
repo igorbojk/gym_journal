@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
-import {AlertController, ToastController} from 'ionic-angular';
+import {AlertController, App, ToastController} from 'ionic-angular';
+import {JournalProfilePage} from "../journal-profile/journal-profile";
+import {JournalsServiceProvider} from "../../providers/journals-service/journals-service";
 
 
 @Component({
@@ -8,14 +10,13 @@ import {AlertController, ToastController} from 'ionic-angular';
 })
 export class TrainingPage {
 
-  journals = [
-    {
-      title: 'Жесткая треннировка'
-    }
-  ]
+  journals = [];
 
   constructor(private alertCtrl: AlertController,
-              public toastCtrl: ToastController) {
+              public toastCtrl: ToastController,
+              private app: App,
+              private journalsService: JournalsServiceProvider) {
+    this.journals = this.journalsService.journals;
   }
 
   addJournal() {
@@ -59,7 +60,10 @@ export class TrainingPage {
 
   addNewJournal(data) {
     this.showToast(`${data.title} добавлен`);
-    this.journals.push(data)
+    this.journalsService.journals.push(data);
   }
 
+  opeJournal(journal){
+    this.app.getRootNav().setRoot(JournalProfilePage, {journal: journal});
+  }
 }

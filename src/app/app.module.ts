@@ -11,6 +11,8 @@ import {TabsPage} from "../pages/tabs/tabs";
 import {ProfilePage} from "../pages/profile/profile";
 import {SettingPage} from "../pages/setting/setting";
 import {TrainingPage} from "../pages/training/training";
+import {JournalProfilePage} from "../pages/journal-profile/journal-profile";
+import { JournalsServiceProvider } from '../providers/journals-service/journals-service';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import {TrainingPage} from "../pages/training/training";
     TabsPage,
     TrainingPage,
     SettingPage,
-    ProfilePage
+    ProfilePage,
+    JournalProfilePage
   ],
   imports: [
     BrowserModule,
@@ -32,13 +35,15 @@ import {TrainingPage} from "../pages/training/training";
     TabsPage,
     TrainingPage,
     SettingPage,
-    ProfilePage
+    ProfilePage,
+    JournalProfilePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UserServiceProvider
+    UserServiceProvider,
+    JournalsServiceProvider
   ]
 })
 export class AppModule {}

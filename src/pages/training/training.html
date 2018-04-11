@@ -15,12 +15,11 @@
 
 
 <ion-content  class="card-background-page">
-
   <ion-fab right bottom>
     <button ion-fab color="danger" (tap)="addJournal()"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
 
-  <ion-card style="background-image: url('assets/imgs/gym.jpeg')" *ngFor="let journal of journals">
+  <ion-card style="background-image: url('assets/imgs/gym.jpeg')" *ngFor="let journal of journals" (tap)="opeJournal(journal)">
     <div class="card-title">{{journal.title}}</div>
   </ion-card>
 
