@@ -1,3 +1,37 @@
 page-training {
 
 }
+
+.card-background-page {
+
+  ion-card {
+    position: relative;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 160px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .card-title {
+    font-size: 2.0em;
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
+    position: relative;
+  }
+
+}
