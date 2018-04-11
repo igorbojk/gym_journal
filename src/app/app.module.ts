@@ -9,12 +9,18 @@ import { HomePage } from '../pages/home/home';
 import {LoginPage} from "../pages/login/login";
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import {TabsPage} from "../pages/tabs/tabs";
+import {ProfilePage} from "../pages/profile/profile";
+import {SettingPage} from "../pages/setting/setting";
+import {TrainingPage} from "../pages/training/training";
 
 @NgModule({
   declarations: [
     MyApp,
     LoginPage,
     TabsPage,
+    TrainingPage,
+    SettingPage,
+    ProfilePage,
     HomePage
   ],
   imports: [
@@ -26,6 +32,9 @@ import {TabsPage} from "../pages/tabs/tabs";
     MyApp,
     LoginPage,
     TabsPage,
+    TrainingPage,
+    SettingPage,
+    ProfilePage,
     HomePage
   ],
   providers: [
