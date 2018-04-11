@@ -1,0 +1,16 @@
+<ion-content>
+
+  <div class="content-block">
+    <div>
+      <ion-list>
+        <ion-item>
+          <ion-input type="text" placeholder="Name" #userName></ion-input>
+
+        </ion-item>
+      </ion-list>
+      <button ion-button full (tap)="setUser(userName.value)" [disabled]="!userName.value.length">Okay</button>
+    </div>
+  </div>
+
+
+</ion-content>

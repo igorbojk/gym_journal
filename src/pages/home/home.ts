@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {UserServiceProvider} from "../../providers/user-service/user-service";
 
 @Component({
   selector: 'page-home',
@@ -7,8 +7,12 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public userService: UserServiceProvider) {
 
+  }
+
+  getCurrentUser() {
+    return this.userService.currentUser;
   }
 
 }

@@ -1,14 +1,22 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      {{getCurrentUser()}}
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content padding class="card-background-page">
+
+  <p>Дневники треннировок</p>
+
+  <ion-card>
+    <img src="assets/imgs/card-saopaolo.png"/>
+    <div class="card-title">São Paulo</div>
+  </ion-card>
+
+  <ion-card class="creating-card">
+    <div class="card-title">Добавить новый</div>
+  </ion-card>
+
 </ion-content>
