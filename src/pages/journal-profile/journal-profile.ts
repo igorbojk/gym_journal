@@ -8,7 +8,7 @@ import {TrainingProfilePage} from "../training-profile/training-profile";
   selector: 'page-journal-profile',
   templateUrl: 'journal-profile.html',
 })
-export class JournalProfilePage {
+export class JournalProfilePage implements OnInit{
 
   currentJournal: any;
 
@@ -20,6 +20,10 @@ export class JournalProfilePage {
     private toastCtrl: ToastController,
     private journalsService: JournalsServiceProvider
   ) {
+
+  }
+
+  ngOnInit() {
     this.setCurrentJournal();
   }
 
