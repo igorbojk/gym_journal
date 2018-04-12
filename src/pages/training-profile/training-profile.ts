@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {AlertController, NavParams, ToastController} from "ionic-angular";
+import {ActionSheetController, AlertController, NavParams, ToastController} from "ionic-angular";
 import {JournalsServiceProvider} from "../../providers/journals-service/journals-service";
+import {ExerciseModel} from "../../declarations/gym-journal.declaration";
 
 
 @Component({
@@ -18,7 +19,8 @@ export class TrainingProfilePage implements OnInit {
     public navParams: NavParams,
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
-    private journalsService: JournalsServiceProvider
+    private journalsService: JournalsServiceProvider,
+    public actionSheetCtrl: ActionSheetController
   ) {
   }
 
@@ -64,7 +66,8 @@ export class TrainingProfilePage implements OnInit {
                 this.showToast('Введите количество подходов');
                 return false;
               }
-              this.journalsService.addExercise(this.journalId, this.trainingId, data);
+              const exercise = new ExerciseModel(data.title, data.repetitions);
+              this.journalsService.addExercise(this.journalId, this.trainingId, exercise);
               this.showToast(`${data.title} добавлен`);
             }
           }
@@ -79,6 +82,77 @@ export class TrainingProfilePage implements OnInit {
       duration: 1500
     });
     toast.present();
+  }
+
+
+  editExercise(exercise) {
+    let promt = this.alertCtrl.create({
+      title: 'Редактирование упражнения',
+      inputs: [
+        {
+          name: 'title',
+          placeholder: 'Введите название',
+          value: exercise.title
+        },
+        {
+          name: 'repetitions',
+          type: 'number',
+          value: exercise.repetitions,
+          placeholder: 'Введите количество подходов'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Отмена',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Сохранить',
+          handler: (data) => {
+            if(!data.title.length) {
+              this.showToast('Введите название');
+              return false;
+            }
+            if(!data.repetitions.length) {
+              this.showToast('Введите количество подходов');
+              return false;
+            }
+            this.journalsService.editExrcise(this.journalId, this.trainingId, exercise.id, data);
+            this.showToast('Сохранено');
+          }
+        }
+      ]
+    });
+    promt.present();
+  }
+
+  openMenu(exercise) {
+    let actionSheet = this.actionSheetCtrl.create({
+      buttons: [
+        {
+          icon: 'create',
+          text: 'Редактировать',
+          handler: () => {
+            this.editExercise(exercise);
+          }
+        },
+        {
+          icon: 'trash',
+          text: 'Удалить',
+          handler: () => {
+            this.deleteExercise(exercise);
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  deleteExercise(exercise) {
+    this.journalsService.deleteExercise(this.journalId, this.trainingId, exercise);
+    this.showToast('Упражнение удалено');
   }
 
 }

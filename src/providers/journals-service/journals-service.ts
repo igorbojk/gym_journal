@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {exercise, Journal} from "../../declarations/gym-journal.declaration";
+import {Journal} from "../../declarations/gym-journal.declaration";
 
 @Injectable()
 export class JournalsServiceProvider {
@@ -26,6 +26,10 @@ export class JournalsServiceProvider {
   constructor() {
   }
 
+  addJournal(journal) {
+    this.journals.push(journal)
+  }
+
   getJournal(id) {
     return this.journals.find(i => i.id === id);
   }
@@ -45,5 +49,19 @@ export class JournalsServiceProvider {
   addExercise(journalId, trainingId, exercise) {
     this.journals.find(i => i.id == journalId).trainings.find(i => i.id === trainingId).exercises.push(exercise);
   }
+
+  editExrcise(journalId, trainingId, exerciseId, exercise) {
+    const currentJournal = this.journals.find(i => i.id == journalId);
+    const currentTraining = currentJournal.trainings.find(i => i.id === trainingId);
+    const currentExercise = currentTraining.exercises.find(i => i.id == exerciseId);
+    Object.assign(currentExercise, exercise);
+  }
+
+  deleteExercise(journalId, trainingId, exercise) {
+    const currentJournal = this.journals.find(i => i.id == journalId);
+    const currentTraining = currentJournal.trainings.find(i => i.id === trainingId);
+    currentTraining.exercises = currentTraining.exercises.filter(i => i.id !== exercise.id);
+  }
+
 
 }

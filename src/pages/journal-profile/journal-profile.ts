@@ -3,6 +3,7 @@ import {AlertController, App, NavController, NavParams, ToastController} from "i
 import {TabsPage} from "../tabs/tabs";
 import {JournalsServiceProvider} from "../../providers/journals-service/journals-service";
 import {TrainingProfilePage} from "../training-profile/training-profile";
+import {TrainingModel} from "../../declarations/gym-journal.declaration";
 
 @Component({
   selector: 'page-journal-profile',
@@ -105,8 +106,8 @@ export class JournalProfilePage implements OnInit{
               this.showToast('Введите название');
               return false;
             }
-            data.id = Math.random().toString(36).substr(2, 9);
-            this.journalsService.addTraining(this.currentJournal.id, data);
+            const training = new TrainingModel(data.title);
+            this.journalsService.addTraining(this.currentJournal.id, training);
           }
         }
       ]

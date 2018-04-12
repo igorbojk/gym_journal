@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AlertController, App, ToastController} from 'ionic-angular';
 import {JournalProfilePage} from "../journal-profile/journal-profile";
 import {JournalsServiceProvider} from "../../providers/journals-service/journals-service";
+import {JournalModel} from "../../declarations/gym-journal.declaration";
 
 
 @Component({
@@ -63,8 +64,8 @@ export class TrainingPage implements OnInit {
 
   addNewJournal(data) {
     this.showToast(`${data.title} добавлен`);
-    data.id = Math.random().toString(36).substr(2, 9);
-    this.journalsService.journals.push(data);
+    const journal = new JournalModel(data.title);
+    this.journalsService.addJournal(journal);
   }
 
   openJournal(journal){

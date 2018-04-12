@@ -36,12 +36,23 @@
     </button>
   </ion-fab>
 
+  <div class="empty-state" *ngIf="!currentJournal.trainings.length">
+    <div>
+      <p>
+        У вас еще нет ни одной треннировки.
+      </p>
+      <p>
+        Для добавления треннировки нажмите "+" внизу экрана.
+      </p>
+    </div>
+  </div>
+
   <ion-card *ngFor="let training of currentJournal.trainings" (tap)="openTraining(training.id)">
     <ion-card-header>
       <span>Название:</span>
       {{training.title}}
     </ion-card-header>
-    <ion-card-content>
+    <ion-card-content *ngIf="training.exercises">
       <span>Количество упражнений:</span>
       {{training.exercises.length}}
     </ion-card-content>

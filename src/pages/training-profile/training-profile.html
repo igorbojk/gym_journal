@@ -21,7 +21,18 @@
     </button>
   </ion-fab>
 
-  <ion-card *ngFor="let exercise of training.exercises" >
+  <div class="empty-state" *ngIf="!training.exercises.length">
+    <div>
+      <p>
+        У вас еще нет ни одного упражнения.
+      </p>
+      <p>
+        Для добавления упражнения нажмите "+" внизу экрана.
+      </p>
+    </div>
+  </div>
+
+  <ion-card *ngFor="let exercise of training.exercises" (tap)="openMenu(exercise)">
     <ion-card-header>
       <span>Название:</span>
       {{exercise.title}}
