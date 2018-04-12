@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NavParams} from "ionic-angular";
-import {TabsPage} from "../tabs/tabs";
-import {JournalProfilePage} from "../journal-profile/journal-profile";
+
 
 @Component({
   selector: 'page-training-profile',
