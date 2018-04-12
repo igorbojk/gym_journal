@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AlertController, App, ToastController} from 'ionic-angular';
 import {JournalProfilePage} from "../journal-profile/journal-profile";
 import {JournalsServiceProvider} from "../../providers/journals-service/journals-service";
@@ -8,7 +8,7 @@ import {JournalsServiceProvider} from "../../providers/journals-service/journals
   selector: 'page-training',
   templateUrl: 'training.html',
 })
-export class TrainingPage {
+export class TrainingPage implements OnInit {
 
   journals = [];
 
@@ -16,6 +16,9 @@ export class TrainingPage {
               public toastCtrl: ToastController,
               private app: App,
               private journalsService: JournalsServiceProvider) {
+  }
+
+  ngOnInit() {
     this.journals = this.journalsService.journals;
   }
 

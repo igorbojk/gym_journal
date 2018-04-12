@@ -1,7 +1,12 @@
 page-journal-profile {
+
   .toolbar-title {
     & > * {
       vertical-align: middle;
     }
+  }
+
+  .training-block {
+    padding: 24px 8px;
   }
 }

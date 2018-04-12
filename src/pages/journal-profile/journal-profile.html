@@ -21,6 +21,25 @@
 </ion-header>
 
 
-<ion-content padding>
-  <p>journal-profile</p>
+<ion-content >
+
+
+  <ion-fab right top edge>
+    <button ion-fab color="danger"><ion-icon name="arrow-dropdown"></ion-icon></button>
+    <ion-fab-list side="bottom">
+      <button ion-fab (tap)="editJournal()">
+        <ion-icon name="create" ></ion-icon>
+      </button>
+      <button ion-fab (tap)="deleteJournal()">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+      <!--<button ion-fab><ion-icon name="add"></ion-icon></button>-->
+    </ion-fab-list>
+  </ion-fab>
+
+  <ion-card class="training-block" *ngFor="let training of currentJournal.trainings">
+    {{training.title}}
+  </ion-card>
+
+
 </ion-content>

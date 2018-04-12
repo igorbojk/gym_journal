@@ -13,13 +13,26 @@
 </ion-header>
 
 
-
-<ion-content  class="card-background-page">
+<ion-content class="card-background-page">
   <ion-fab right bottom>
-    <button ion-fab color="danger" (tap)="addJournal()"><ion-icon name="add"></ion-icon></button>
+    <button ion-fab color="danger" (tap)="addJournal()">
+      <ion-icon name="add"></ion-icon>
+    </button>
   </ion-fab>
 
-  <ion-card style="background-image: url('assets/imgs/gym.jpeg')" *ngFor="let journal of journals" (tap)="opeJournal(journal)">
+  <div class="empty-state" *ngIf="!journals.length">
+    <div>
+      <p>
+        У вас еще нет ни одного журнала треннировок.
+      </p>
+      <p>
+        Для создания журнала нажмите "+" внизу экрана.
+      </p>
+    </div>
+  </div>
+
+  <ion-card style="background-image: url('assets/imgs/gym.jpeg')" *ngFor="let journal of journals"
+            (tap)="opeJournal(journal)">
     <div class="card-title">{{journal.title}}</div>
   </ion-card>
 

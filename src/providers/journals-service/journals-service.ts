@@ -1,15 +1,28 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {Journal} from "../../declarations/gym-journal.declaration";
 
 @Injectable()
 export class JournalsServiceProvider {
 
-  journals = [
+  journals: Journal[] = [
     {
-      title: 'Жесткая треннировка'
+      title: 'Жесткая треннировка',
+      trainings: [
+        {
+          title: 'Бицепс/трицепс'
+        },
+        {
+          title: 'Спина/грудь'
+        }
+      ]
     }
   ];
 
   constructor() {
+  }
+
+  deleteJournal(journal) {
+    this.journals = this.journals.filter(i => i !== journal)
   }
 
 }
