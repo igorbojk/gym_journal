@@ -38,12 +38,23 @@ export class JournalsServiceProvider {
     this.journals = this.journals.filter(i => i !== journal)
   }
 
+  getTraining(journalId, trainingId) {
+    return this.journals.find(i => i.id == journalId).trainings.find(i => i.id === trainingId);
+  }
+
   addTraining(journalId, training) {
     this.journals.find(i => i.id == journalId).trainings.push(training);
   }
 
-  getTraining(journalId, trainingId) {
-    return this.journals.find(i => i.id == journalId).trainings.find(i => i.id === trainingId);
+  updateTraining(journalId, trainingId, training) {
+    const currentJournal = this.journals.find(i => i.id == journalId);
+    const currentTraining = currentJournal.trainings.find(i => i.id === trainingId);
+    Object.assign(currentTraining, training);
+  }
+
+  deleteTraining(journalId, trainingId) {
+    const currentJournal = this.journals.find(i => i.id == journalId);
+    currentJournal.trainings = currentJournal.trainings.filter(i => i.id !== trainingId);
   }
 
   addExercise(journalId, trainingId, exercise) {

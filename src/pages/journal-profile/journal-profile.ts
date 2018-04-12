@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AlertController, App, NavController, NavParams, ToastController} from "ionic-angular";
+import {ActionSheetController, AlertController, App, NavController, NavParams, ToastController} from "ionic-angular";
 import {TabsPage} from "../tabs/tabs";
 import {JournalsServiceProvider} from "../../providers/journals-service/journals-service";
 import {TrainingProfilePage} from "../training-profile/training-profile";

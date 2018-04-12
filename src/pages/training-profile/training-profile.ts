@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActionSheetController, AlertController, NavParams, ToastController} from "ionic-angular";
+import {ActionSheetController, AlertController, NavController, NavParams, ToastController} from "ionic-angular";
 import {JournalsServiceProvider} from "../../providers/journals-service/journals-service";
 import {ExerciseModel} from "../../declarations/gym-journal.declaration";
 
@@ -20,7 +20,8 @@ export class TrainingProfilePage implements OnInit {
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
     private journalsService: JournalsServiceProvider,
-    public actionSheetCtrl: ActionSheetController
+    public actionSheetCtrl: ActionSheetController,
+    private navCtrl: NavController
   ) {
   }
 
@@ -153,6 +154,45 @@ export class TrainingProfilePage implements OnInit {
   deleteExercise(exercise) {
     this.journalsService.deleteExercise(this.journalId, this.trainingId, exercise);
     this.showToast('Упражнение удалено');
+  }
+
+
+  deleteTraining() {
+    this.navCtrl.popToRoot();
+    this.journalsService.deleteTraining(this.journalId, this.trainingId);
+    this.showToast('треннировку удалено');
+  }
+
+  editTraining() {
+    let promt = this.alertCtrl.create({
+      title: 'Введите название треннировки',
+      inputs: [
+        {
+          name: 'title',
+          placeholder: 'Введите название',
+          value: this.training.title
+        }
+      ],
+      buttons: [
+        {
+          text: 'Отмена',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Сохранить',
+          handler: (data) => {
+            if(!data.title.length) {
+              this.showToast('Введите название');
+              return false;
+            }
+            this.journalsService.updateTraining(this.journalId, this.trainingId, data);
+          }
+        }
+      ]
+    });
+    promt.present();
   }
 
 }
