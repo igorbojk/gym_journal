@@ -18,9 +18,9 @@ export interface Exercise {
 
 export class JournalModel {
 
-  private id: string;
-  private title: string;
-  private trainings: Training[];
+   id: string;
+   title: string;
+   trainings: Training[];
 
   constructor(title: string) {
     this.id = Math.random().toString(36).substr(2, 9);
@@ -30,9 +30,9 @@ export class JournalModel {
 }
 
 export class TrainingModel {
-  private id: string;
-  private title: string;
-  private exercises: Exercise[];
+   id: string;
+   title: string;
+   exercises: Exercise[];
 
   constructor(title: string) {
     this.id = Math.random().toString(36).substr(2, 9);
@@ -42,9 +42,9 @@ export class TrainingModel {
 }
 
 export class ExerciseModel {
-  private id: string;
-  private title: string;
-  private repetitions: number;
+   id: string;
+   title: string;
+   repetitions: number;
 
   constructor(title: string, repetitions: number) {
     this.id = Math.random().toString(36).substr(2, 9);
