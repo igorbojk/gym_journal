@@ -63,10 +63,11 @@ export class TrainingPage implements OnInit {
 
   addNewJournal(data) {
     this.showToast(`${data.title} добавлен`);
+    data.id = Math.random().toString(36).substr(2, 9);
     this.journalsService.journals.push(data);
   }
 
   openJournal(journal){
-    this.app.getRootNav().setRoot(JournalProfilePage, {journal: journal});
+    this.app.getRootNav().setRoot(JournalProfilePage, {journalId: journal.id});
   }
 }

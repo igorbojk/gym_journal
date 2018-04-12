@@ -6,13 +6,30 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>{{training.title}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+  <ion-fab bottom right>
+    <button ion-fab color="primary" (tap)="addExercise()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+
+  <ion-card *ngFor="let exercise of training.exercises" >
+    <ion-card-header>
+      <span>Название:</span>
+      {{exercise.title}}
+    </ion-card-header>
+    <ion-card-content>
+      <span>Количество подходов:</span>
+      {{exercise.repetitions}}
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

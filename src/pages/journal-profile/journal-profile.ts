@@ -28,7 +28,8 @@ export class JournalProfilePage implements OnInit{
   }
 
   setCurrentJournal() {
-    this.currentJournal = this.navParams.get('journal');
+    const journalId = this.navParams.get('journalId');
+    this.currentJournal = this.journalsService.getJournal(journalId);
   }
 
   back() {
@@ -104,7 +105,8 @@ export class JournalProfilePage implements OnInit{
               this.showToast('Введите название');
               return false;
             }
-            this.journalsService.addTraining(this.currentJournal, data);
+            data.id = Math.random().toString(36).substr(2, 9);
+            this.journalsService.addTraining(this.currentJournal.id, data);
           }
         }
       ]
@@ -112,8 +114,8 @@ export class JournalProfilePage implements OnInit{
     promt.present();
   }
 
-  openTraining(training) {
-      this.navCtrl.push(TrainingProfilePage, {training: training});
+  openTraining(trainingId) {
+      this.navCtrl.push(TrainingProfilePage, {journalId: this.currentJournal.id, trainingId: trainingId});
   }
 
 }

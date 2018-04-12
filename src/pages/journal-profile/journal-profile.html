@@ -36,8 +36,15 @@
     </button>
   </ion-fab>
 
-  <ion-card class="training-block" *ngFor="let training of currentJournal.trainings" (tap)="openTraining(training)">
-    {{training.title}}
+  <ion-card *ngFor="let training of currentJournal.trainings" (tap)="openTraining(training.id)">
+    <ion-card-header>
+      <span>Название:</span>
+      {{training.title}}
+    </ion-card-header>
+    <ion-card-content>
+      <span>Количество упражнений:</span>
+      {{training.exercises.length}}
+    </ion-card-content>
   </ion-card>
 
 
