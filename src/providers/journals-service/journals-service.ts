@@ -25,4 +25,8 @@ export class JournalsServiceProvider {
     this.journals = this.journals.filter(i => i !== journal)
   }
 
+  addTraining(journal, training) {
+    this.journals.find(i => i == journal).trainings.push(training);
+  }
+
 }

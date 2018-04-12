@@ -13,6 +13,8 @@ import {SettingPage} from "../pages/setting/setting";
 import {TrainingPage} from "../pages/training/training";
 import {JournalProfilePage} from "../pages/journal-profile/journal-profile";
 import { JournalsServiceProvider } from '../providers/journals-service/journals-service';
+import {TrainingProfilePage} from "../pages/training-profile/training-profile";
+import {CalendarPage} from "../pages/calendar/calendar";
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { JournalsServiceProvider } from '../providers/journals-service/journals-
     TrainingPage,
     SettingPage,
     ProfilePage,
-    JournalProfilePage
+    JournalProfilePage,
+    TrainingProfilePage,
+    CalendarPage
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,9 @@ import { JournalsServiceProvider } from '../providers/journals-service/journals-
     TrainingPage,
     SettingPage,
     ProfilePage,
-    JournalProfilePage
+    JournalProfilePage,
+    TrainingProfilePage,
+    CalendarPage
   ],
   providers: [
     StatusBar,

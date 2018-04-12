@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import {AlertController, App, NavParams, ToastController} from "ionic-angular";
+import {Component, OnInit} from '@angular/core';
+import {AlertController, App, NavController, NavParams, ToastController} from "ionic-angular";
 import {TabsPage} from "../tabs/tabs";
 import {JournalsServiceProvider} from "../../providers/journals-service/journals-service";
+import {TrainingProfilePage} from "../training-profile/training-profile";
 
 @Component({
   selector: 'page-journal-profile',
@@ -12,6 +13,7 @@ export class JournalProfilePage {
   currentJournal: any;
 
   constructor(
+    private navCtrl: NavController,
     public navParams: NavParams,
     private app: App,
     private alertCtrl: AlertController,
@@ -73,6 +75,41 @@ export class JournalProfilePage {
     this.journalsService.deleteJournal(this.currentJournal);
     this.showToast('Журнал удален');
     this.back();
+  }
+
+  addTraining() {
+    let promt = this.alertCtrl.create({
+      title: 'Введите название треннировки',
+      inputs: [
+        {
+          name: 'title',
+          placeholder: 'Введите название'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Отмена',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Сохранить',
+          handler: (data) => {
+            if(!data.title.length) {
+              this.showToast('Введите название');
+              return false;
+            }
+            this.journalsService.addTraining(this.currentJournal, data);
+          }
+        }
+      ]
+    });
+    promt.present();
+  }
+
+  openTraining(training) {
+      this.navCtrl.push(TrainingProfilePage, {training: training});
   }
 
 }

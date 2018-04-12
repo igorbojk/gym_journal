@@ -66,7 +66,7 @@ export class TrainingPage implements OnInit {
     this.journalsService.journals.push(data);
   }
 
-  opeJournal(journal){
+  openJournal(journal){
     this.app.getRootNav().setRoot(JournalProfilePage, {journal: journal});
   }
 }
