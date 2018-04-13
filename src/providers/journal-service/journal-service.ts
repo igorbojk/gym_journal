@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {HistoryTraining, Journal} from "../../declarations/gym-journal.declaration";
-import * as moment from "moment";
 
 @Injectable()
 export class JournalServiceProvider {
@@ -51,10 +50,14 @@ export class JournalServiceProvider {
   }
 
   addExercise(trainingId, exercise) {
-    this.journal.trainings.find(i => i.id === trainingId).exercises.push(exercise);
+    for (let i = 1; i <= exercise.repetitionsCount; i++) {
+      exercise.repetitions.push({});
+    }
+    const currentTraining = this.journal.trainings.find(i => i.id === trainingId);
+    currentTraining.exercises.push(exercise);
   }
 
-  editExrcise(trainingId, exerciseId, exercise) {
+  editExercise(trainingId, exerciseId, exercise) {
     const currentExercise = this.journal.trainings.find(i => i.id === trainingId).exercises.find(i => i.id == exerciseId);
     Object.assign(currentExercise, exercise);
   }
@@ -64,17 +67,22 @@ export class JournalServiceProvider {
     currentTraining.exercises = currentTraining.exercises.filter(i => i.id !== exercise.id);
   }
 
-
   getCalendarData() {
     return this.calendar;
+  }
+
+  getCurrentTraining(trainingId) {
+    return this.journal.trainings.find(i => i.id == trainingId);
   }
 
   startTraining(training) {
     this.calendar.push(training);
   }
 
-  stopTraining(trainingId) {
-    this.calendar.find(i => i.id == trainingId).stopAt = Date.now();
+  stopTraining(trainingId, data) {
+    const currentTraining = this.calendar.find(i => i.id == trainingId);
+    Object.assign(currentTraining, data);
+    currentTraining.stopAt = Date.now();
   }
 
 }

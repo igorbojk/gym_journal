@@ -12,8 +12,8 @@
 
 <ion-content >
 
-  <ion-fab bottom right>
-    <button ion-fab color="primary" (tap)="addTraining()">
+  <ion-fab right top edge >
+    <button ion-fab color="dark" (tap)="addTraining()">
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
@@ -40,7 +40,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-fab right top edge *ngIf="currentJournal.trainings.length">
+  <ion-fab bottom right *ngIf="currentJournal.trainings.length">
     <button ion-fab color="danger" (tap)="openStartingTrainingMenu()"><ion-icon name="play"></ion-icon></button>
   </ion-fab>
 

@@ -17,10 +17,16 @@ export class CalendarPage implements OnInit{
 
   ngOnInit() {
     this.calendar = this.journalService.getCalendarData();
+    console.log(this.calendar);
   }
 
   getTrainingDate(date) {
     return this.momentService.getFullDate(date);
+  }
+
+  getDuration(start, end) {
+    const duration = end - start;
+    return this.momentService.getDuration(duration);
   }
 
 }

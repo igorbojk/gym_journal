@@ -16,6 +16,11 @@ export interface Exercise {
   repetitions: number;
 }
 
+export interface  Repetition {
+  repetition?: number;
+  weight?: number;
+}
+
 export class TrainingClass {
    id: string;
    title: string;
@@ -31,12 +36,14 @@ export class TrainingClass {
 export class ExerciseClass {
    id: string;
    title: string;
-   repetitions: number;
+  repetitionsCount: number;
+  repetitions: Repetition[];
 
-  constructor(title: string, repetitions: number) {
+  constructor(title: string, repetitionsCount: number) {
     this.id = Math.random().toString(36).substr(2, 9);
     this.title = title;
-    this.repetitions = repetitions;
+    this.repetitionsCount = repetitionsCount;
+    this.repetitions = [];
   }
 }
 

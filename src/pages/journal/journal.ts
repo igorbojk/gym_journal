@@ -78,10 +78,10 @@ export class JournalPage implements OnInit{
       this.navCtrl.push(TrainingProfilePage, {journalId: this.currentJournal.id, trainingId: trainingId});
   }
 
-  startTraining(title) {
-    const training = new HistoryTrainingClass(title);
-    this.journalService.startTraining(training);
-    this.app.getRootNav().setRoot(CurrentTrainingPage, {trainingId: training.id});
+  startTraining(training) {
+    const currentTraining = new HistoryTrainingClass(training.title);
+    this.journalService.startTraining(currentTraining);
+    this.app.getRootNav().setRoot(CurrentTrainingPage, {trainingId: training.id, trainingIdToSave: currentTraining.id});
   }
 
   openStartingTrainingMenu() {
@@ -99,7 +99,7 @@ export class JournalPage implements OnInit{
         {
           text: element.title,
           handler: () => {
-            this.startTraining(element.title);
+            this.startTraining(element);
           }
         }
       );

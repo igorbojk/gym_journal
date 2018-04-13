@@ -44,7 +44,7 @@ export class TrainingProfilePage implements OnInit {
             placeholder: 'Введите название'
           },
           {
-            name: 'repetitions',
+            name: 'repetitionsCount',
             type: 'number',
             placeholder: 'Введите количество подходов'
           }
@@ -63,11 +63,11 @@ export class TrainingProfilePage implements OnInit {
                 this.showToast('Введите название');
                 return false;
               }
-              if(!data.repetitions.length) {
+              if(!data.repetitionsCount.length) {
                 this.showToast('Введите количество подходов');
                 return false;
               }
-              const exercise = new ExerciseClass(data.title, data.repetitions);
+              const exercise = new ExerciseClass(data.title, data.repetitionsCount);
               this.journalService.addExercise(this.trainingId, exercise);
               this.showToast(`${data.title} добавлен`);
             }
@@ -120,7 +120,7 @@ export class TrainingProfilePage implements OnInit {
               this.showToast('Введите количество подходов');
               return false;
             }
-            this.journalService.editExrcise(this.trainingId, exercise.id, data);
+            this.journalService.editExercise(this.trainingId, exercise.id, data);
             this.showToast('Сохранено');
           }
         }

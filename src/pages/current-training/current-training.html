@@ -9,6 +9,28 @@
 
 <ion-content >
 
+  <ion-grid>
+
+    <ion-row *ngFor="let exercise of currentTraining.exercises">
+      <ion-col col-12>
+        {{exercise.title}}
+      </ion-col>
+      <ion-col col-12>
+        <ion-row>
+          <ion-col col-4 *ngFor="let repetition of exercise.repetitions" class="exercise-block">
+            <ion-row>
+              <ion-col col-12>
+                <ion-input type="number" placeholder="Повторения" [(ngModel)]="repetition.repetition"></ion-input>
+              </ion-col>
+              <ion-col col-12>
+                <ion-input type="number" placeholder="Вес" [(ngModel)]="repetition.weight"></ion-input>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
   <ion-fab bottom right>
     <button ion-fab color="danger" (tap)="stopTraining()">
