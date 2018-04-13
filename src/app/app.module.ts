@@ -10,21 +10,20 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
 import {TabsPage} from "../pages/tabs/tabs";
 import {ProfilePage} from "../pages/profile/profile";
 import {SettingPage} from "../pages/setting/setting";
-import {TrainingPage} from "../pages/training/training";
-import {JournalProfilePage} from "../pages/journal-profile/journal-profile";
-import { JournalsServiceProvider } from '../providers/journals-service/journals-service';
+import {JournalPage} from "../pages/journal/journal";
+import { JournalServiceProvider } from '../providers/journal-service/journal-service';
 import {TrainingProfilePage} from "../pages/training-profile/training-profile";
 import {CalendarPage} from "../pages/calendar/calendar";
+import { MomentServiceProvider } from '../providers/moment-service/moment-service';
 
 @NgModule({
   declarations: [
     MyApp,
     LoginPage,
     TabsPage,
-    TrainingPage,
     SettingPage,
     ProfilePage,
-    JournalProfilePage,
+    JournalPage,
     TrainingProfilePage,
     CalendarPage
   ],
@@ -37,10 +36,9 @@ import {CalendarPage} from "../pages/calendar/calendar";
     MyApp,
     LoginPage,
     TabsPage,
-    TrainingPage,
     SettingPage,
     ProfilePage,
-    JournalProfilePage,
+    JournalPage,
     TrainingProfilePage,
     CalendarPage
   ],
@@ -49,7 +47,8 @@ import {CalendarPage} from "../pages/calendar/calendar";
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserServiceProvider,
-    JournalsServiceProvider
+    JournalServiceProvider,
+    MomentServiceProvider
   ]
 })
 export class AppModule {}

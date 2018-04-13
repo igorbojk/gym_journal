@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActionSheetController, AlertController, NavController, NavParams, ToastController} from "ionic-angular";
-import {JournalsServiceProvider} from "../../providers/journals-service/journals-service";
+import {JournalServiceProvider} from "../../providers/journal-service/journal-service";
 import {ExerciseModel} from "../../declarations/gym-journal.declaration";
 
 
@@ -19,7 +19,7 @@ export class TrainingProfilePage implements OnInit {
     public navParams: NavParams,
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
-    private journalsService: JournalsServiceProvider,
+    private journalService: JournalServiceProvider,
     public actionSheetCtrl: ActionSheetController,
     private navCtrl: NavController
   ) {
@@ -32,7 +32,7 @@ export class TrainingProfilePage implements OnInit {
   }
 
   setCurrentTraining() {
-    this.training = this.journalsService.getTraining(this.journalId, this.trainingId);
+    this.training = this.journalService.getTraining(this.trainingId);
   }
 
   addExercise() {
@@ -68,7 +68,7 @@ export class TrainingProfilePage implements OnInit {
                 return false;
               }
               const exercise = new ExerciseModel(data.title, data.repetitions);
-              this.journalsService.addExercise(this.journalId, this.trainingId, exercise);
+              this.journalService.addExercise(this.trainingId, exercise);
               this.showToast(`${data.title} добавлен`);
             }
           }
@@ -120,7 +120,7 @@ export class TrainingProfilePage implements OnInit {
               this.showToast('Введите количество подходов');
               return false;
             }
-            this.journalsService.editExrcise(this.journalId, this.trainingId, exercise.id, data);
+            this.journalService.editExrcise(this.trainingId, exercise.id, data);
             this.showToast('Сохранено');
           }
         }
@@ -152,14 +152,14 @@ export class TrainingProfilePage implements OnInit {
   }
 
   deleteExercise(exercise) {
-    this.journalsService.deleteExercise(this.journalId, this.trainingId, exercise);
+    this.journalService.deleteExercise(this.trainingId, exercise);
     this.showToast('Упражнение удалено');
   }
 
 
   deleteTraining() {
     this.navCtrl.popToRoot();
-    this.journalsService.deleteTraining(this.journalId, this.trainingId);
+    this.journalService.deleteTraining(this.trainingId);
     this.showToast('треннировку удалено');
   }
 
@@ -187,7 +187,7 @@ export class TrainingProfilePage implements OnInit {
               this.showToast('Введите название');
               return false;
             }
-            this.journalsService.updateTraining(this.journalId, this.trainingId, data);
+            this.journalService.updateTraining(this.trainingId, data);
           }
         }
       ]

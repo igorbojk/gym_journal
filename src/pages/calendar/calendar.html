@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>calendar</ion-title>
+    <ion-title>Календарь</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,4 +15,8 @@
 
 <ion-content padding>
   Календарь
+
+  <p *ngFor="let training of calendar">
+    {{getTrainingDate(training)}}
+  </p>
 </ion-content>
