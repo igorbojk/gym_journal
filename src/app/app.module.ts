@@ -15,6 +15,7 @@ import { JournalServiceProvider } from '../providers/journal-service/journal-ser
 import {TrainingProfilePage} from "../pages/training-profile/training-profile";
 import {CalendarPage} from "../pages/calendar/calendar";
 import { MomentServiceProvider } from '../providers/moment-service/moment-service';
+import {CurrentTrainingPage} from "../pages/current-training/current-training";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MomentServiceProvider } from '../providers/moment-service/moment-servic
     ProfilePage,
     JournalPage,
     TrainingProfilePage,
-    CalendarPage
+    CalendarPage,
+    CurrentTrainingPage
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,8 @@ import { MomentServiceProvider } from '../providers/moment-service/moment-servic
     ProfilePage,
     JournalPage,
     TrainingProfilePage,
-    CalendarPage
+    CalendarPage,
+    CurrentTrainingPage
   ],
   providers: [
     StatusBar,

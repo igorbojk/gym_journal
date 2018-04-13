@@ -40,8 +40,8 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-fab right top edge>
-    <button ion-fab color="danger" (tap)="startTraining()"><ion-icon name="play"></ion-icon></button>
+  <ion-fab right top edge *ngIf="currentJournal.trainings.length">
+    <button ion-fab color="danger" (tap)="openStartingTrainingMenu()"><ion-icon name="play"></ion-icon></button>
   </ion-fab>
 
 

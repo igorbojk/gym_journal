@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {AlertController, NavController, ToastController} from "ionic-angular";
+import {ActionSheetController, AlertController, App, NavController, ToastController} from "ionic-angular";
 import {JournalServiceProvider} from "../../providers/journal-service/journal-service";
 import {TrainingProfilePage} from "../training-profile/training-profile";
-import {TrainingModel} from "../../declarations/gym-journal.declaration";
+import {HistoryTrainingClass, TrainingClass} from "../../declarations/gym-journal.declaration";
+import {CurrentTrainingPage} from "../current-training/current-training";
 
 
 
@@ -18,7 +19,9 @@ export class JournalPage implements OnInit{
     private navCtrl: NavController,
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
-    private journalService: JournalServiceProvider
+    private journalService: JournalServiceProvider,
+    private actionSheetCtrl: ActionSheetController,
+    private app: App
   ) {
 
   }
@@ -62,7 +65,7 @@ export class JournalPage implements OnInit{
               this.showToast('Введите название');
               return false;
             }
-            const training = new TrainingModel(data.title);
+            const training = new TrainingClass(data.title);
             this.journalService.addTraining(training);
           }
         }
@@ -75,9 +78,33 @@ export class JournalPage implements OnInit{
       this.navCtrl.push(TrainingProfilePage, {journalId: this.currentJournal.id, trainingId: trainingId});
   }
 
-  startTraining() {
-    const dateNow = Date.now();
-
-    this.journalService.addTrainingToCalendar(dateNow)
+  startTraining(title) {
+    const training = new HistoryTrainingClass(title);
+    this.journalService.startTraining(training);
+    this.app.getRootNav().setRoot(CurrentTrainingPage, {trainingId: training.id});
   }
+
+  openStartingTrainingMenu() {
+    let actionSheet = this.actionSheetCtrl.create({
+      buttons: this.generateButtonsForTrainings()
+    });
+    actionSheet.present();
+  }
+
+  generateButtonsForTrainings() {
+    const buttons = [];
+
+    this.currentJournal.trainings.forEach((element) => {
+      buttons.push(
+        {
+          text: element.title,
+          handler: () => {
+            this.startTraining(element.title);
+          }
+        }
+      );
+    });
+    return buttons;
+  }
+
 }

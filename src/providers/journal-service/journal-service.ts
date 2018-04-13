@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Journal} from "../../declarations/gym-journal.declaration";
+import {HistoryTraining, Journal} from "../../declarations/gym-journal.declaration";
+import * as moment from "moment";
 
 @Injectable()
 export class JournalServiceProvider {
@@ -21,7 +22,7 @@ export class JournalServiceProvider {
       ]
     };
 
-  calendar = [
+  calendar: HistoryTraining[] = [
 
   ];
 
@@ -68,8 +69,12 @@ export class JournalServiceProvider {
     return this.calendar;
   }
 
-  addTrainingToCalendar(training) {
+  startTraining(training) {
     this.calendar.push(training);
+  }
+
+  stopTraining(trainingId) {
+    this.calendar.find(i => i.id == trainingId).stopAt = Date.now();
   }
 
 }

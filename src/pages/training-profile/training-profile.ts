@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActionSheetController, AlertController, NavController, NavParams, ToastController} from "ionic-angular";
 import {JournalServiceProvider} from "../../providers/journal-service/journal-service";
-import {ExerciseModel} from "../../declarations/gym-journal.declaration";
+import {ExerciseClass} from "../../declarations/gym-journal.declaration";
 
 
 @Component({
@@ -67,7 +67,7 @@ export class TrainingProfilePage implements OnInit {
                 this.showToast('Введите количество подходов');
                 return false;
               }
-              const exercise = new ExerciseModel(data.title, data.repetitions);
+              const exercise = new ExerciseClass(data.title, data.repetitions);
               this.journalService.addExercise(this.trainingId, exercise);
               this.showToast(`${data.title} добавлен`);
             }

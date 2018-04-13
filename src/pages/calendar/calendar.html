@@ -13,10 +13,22 @@
 </ion-header>
 
 
-<ion-content padding>
-  Календарь
+<ion-content>
+  <ion-card *ngFor="let training of calendar">
+    <ion-card-header>
+      <span>Название:</span>
+      {{training.title}}
+    </ion-card-header>
+    <ion-card-content>
+      <div>
+        <p>Начало в:</p>
+        <p>{{getTrainingDate(training.startAt)}}</p>
+      </div>
+      <div>
+        <p>Окончание в:</p>
+        <p>{{getTrainingDate(training.stopAt)}}</p>
+      </div>
+    </ion-card-content>
+  </ion-card>
 
-  <p *ngFor="let training of calendar">
-    {{getTrainingDate(training)}}
-  </p>
 </ion-content>
