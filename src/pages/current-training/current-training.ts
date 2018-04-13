@@ -10,7 +10,7 @@ import {Training} from "../../declarations/gym-journal.declaration";
 export class CurrentTrainingPage implements OnInit{
 
   trainingId: string;
-  trainingToSaveId: string;
+  trainingIdToSave: string;
 
   currentTraining: Training;
 
