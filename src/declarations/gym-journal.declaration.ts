@@ -53,6 +53,7 @@ export interface HistoryTraining {
   title: string;
   startAt: number;
   stopAt: number;
+  weight: number;
 }
 
 export class HistoryTrainingClass {

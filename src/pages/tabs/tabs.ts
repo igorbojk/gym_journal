@@ -3,6 +3,7 @@ import {ProfilePage} from "../profile/profile";
 import {SettingPage} from "../setting/setting";
 import {CalendarPage} from "../calendar/calendar";
 import {JournalPage} from "../journal/journal";
+import {StatisticPage} from "../statistic/statistic";
 
 @Component({
   selector: 'page-tabs',
@@ -10,16 +11,13 @@ import {JournalPage} from "../journal/journal";
 })
 export class TabsPage {
 
-  tab1: any;
-  tab2: any;
-  tab3: any;
-  tab4: any;
+  journal = JournalPage;
+  calendar = CalendarPage;
+  statistic = StatisticPage;
+  profile = ProfilePage;
+  settings = SettingPage;
 
   constructor() {
-    this.tab1 = JournalPage;
-    this.tab2 = CalendarPage;
-    this.tab3 = ProfilePage;
-    this.tab4 = SettingPage;
   }
 
 

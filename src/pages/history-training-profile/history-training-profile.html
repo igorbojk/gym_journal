@@ -13,7 +13,7 @@
   <p>Окончание в:</p>
   <p>{{getTrainingDate(training.stopAt)}}</p>
   <p>Продолжительность: {{getDuration(training.startAt, training.stopAt)}}</p>
-
+  <p>Текущий вес: {{training.weight}} кг</p>
   <ion-grid>
     <ion-row *ngFor="let exercise of training.exercises">
       <ion-col col-12>
