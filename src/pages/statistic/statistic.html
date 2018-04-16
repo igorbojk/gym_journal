@@ -15,8 +15,11 @@
 
 <ion-content padding>
   <div [ngSwitch]="viewState">
-    <div *ngSwitchCase="'empty'">
-      empty
+    <div *ngSwitchCase="'empty'" class="empty-state">
+      <p>
+        Еще не проводилось ни одной треннировки для статистики.
+        Проведите треннировку чтобы появилась статистика
+      </p>
     </div>
     <div *ngSwitchCase="'view'">
       <p>Изменение веса</p>
@@ -26,9 +29,24 @@
               [options]="lineChartOptions"
               [colors]="statisticChartColors"
               [legend]="false"
-              [chartType]="lineChartType">
+              [chartType]="'line'">
       </canvas>
-
+      <p>Статистика по треннировкам</p>
+      <button (tap)="openChartSortingMenu()" ion-button full >Выбрать треннировку</button>
+      <div *ngIf="currentTraining">
+        <p>{{currentTraining.title}}</p>
+        <div *ngFor="let exercise of currentTraining.exercises">
+          <p>{{exercise.title}}</p>
+          <canvas baseChart
+                  [datasets]="getExerciseMaxWeight(exercise.title)"
+                  [labels]="currentTrainingDates"
+                  [options]="lineChartOptions"
+                  [colors]="statisticChartColors"
+                  [legend]="false"
+                  [chartType]="'line'">
+          </canvas>
+        </div>
+      </div>
     </div>
   </div>
 

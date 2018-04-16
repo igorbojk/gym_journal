@@ -14,18 +14,6 @@ export class JournalServiceProvider {
           exercises: [
             {
               id: Math.random().toString(36).substr(2, 9),
-              title: 'test',
-              repetitionsCount: 5,
-              repetitions: [
-                {},
-                {},
-                {},
-                {},
-                {}
-              ]
-            },
-            {
-              id: Math.random().toString(36).substr(2, 9),
               title: 'test2',
               repetitionsCount: 2,
               repetitions: [
@@ -109,6 +97,13 @@ export class JournalServiceProvider {
     const currentTraining = this.calendar.find(i => i.id == trainingId);
     Object.assign(currentTraining, data);
     currentTraining.stopAt = Date.now();
+  }
+
+
+  deleteHistoryTraining(trainingId) {
+    console.log(this.calendar);
+    this.calendar = this.calendar.filter(i => i.id !== trainingId);
+    console.log(this.calendar);
   }
 
   getHistoryTraining(trainingId) {

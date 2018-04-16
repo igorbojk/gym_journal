@@ -23,7 +23,6 @@ export class HistoryTrainingProfilePage implements OnInit{
   ngOnInit() {
     this.trainingId = this.navParams.get('trainingId');
     this.setHistoryTraining();
-    console.log(this.training);
   }
 
   setHistoryTraining() {

@@ -7,6 +7,7 @@ export interface Journal {
 export interface Training {
   id: string;
   title: string;
+  weight?: number;
   exercises: Exercise[];
 }
 
@@ -54,6 +55,7 @@ export interface HistoryTraining {
   startAt: number;
   stopAt: number;
   weight: number;
+  exercises: Exercise[];
 }
 
 export class HistoryTrainingClass {

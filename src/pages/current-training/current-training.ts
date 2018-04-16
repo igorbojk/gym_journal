@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {JournalServiceProvider} from "../../providers/journal-service/journal-service";
-import {ActionSheetController, App, NavParams, Platform} from "ionic-angular";
+import {ActionSheetController, App, NavParams, Platform, ToastController} from "ionic-angular";
 import {TabsPage} from "../tabs/tabs";
 import {Training} from "../../declarations/gym-journal.declaration";
 @Component({
@@ -19,7 +19,8 @@ export class CurrentTrainingPage implements OnInit{
     private navParams: NavParams,
     private app: App,
     private platform: Platform,
-    private actionSheetCtrl: ActionSheetController
+    private actionSheetCtrl: ActionSheetController,
+    private toastCtrl: ToastController
   ) {
     platform.registerBackButtonAction(() => {
       this.openMenu();
@@ -33,6 +34,10 @@ export class CurrentTrainingPage implements OnInit{
   }
 
   stopTraining() {
+    // if(!this.isHaveEmptyFields()) {
+    //   this.showToast('Заполните все поля!');
+    //   return;
+    // }
     this.journalService.stopTraining(this.trainingIdToSave, this.currentTraining);
     this.app.getRootNav().setRoot(TabsPage);
   }
@@ -40,17 +45,16 @@ export class CurrentTrainingPage implements OnInit{
   setCurrentTraining() {
     const training = this.journalService.getCurrentTraining(this.trainingId);
     this.currentTraining = JSON.parse(JSON.stringify(training));
-    console.log(this.currentTraining);
   }
 
   openMenu() {
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Вы уверены, что хотите выйти? При выходе будет остановленна треннировка.',
+      title: 'Вы уверены, что хотите выйти? Треннировка не будет сохранена.',
       buttons: [
         {
           text: 'Выйти',
           handler: () => {
-            this.stopTraining();
+            this.journalService.deleteHistoryTraining(this.trainingIdToSave);
             this.platform.exitApp();
           }
         },
@@ -63,5 +67,23 @@ export class CurrentTrainingPage implements OnInit{
     });
     actionSheet.present();
   }
+
+  // isHaveEmptyFields() {
+  //   let isHaveEmptyExercise;
+  //   this.currentTraining.exercises.forEach((element) => {
+  //     isHaveEmptyExercise = element.repetitions.forEach((el) => {
+  //       return el.repetition == undefined || el.weight == undefined;
+  //     });
+  //   });
+  //   return  this.currentTraining.weight && isHaveEmptyExercise;
+  // }
+  //
+  // showToast(message) {
+  //   let toast = this.toastCtrl.create({
+  //     message: message,
+  //     duration: 1500
+  //   });
+  //   toast.present();
+  // }
 
 }
