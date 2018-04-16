@@ -19,6 +19,7 @@ import {CurrentTrainingPage} from "../pages/current-training/current-training";
 import {HistoryTrainingProfilePage} from "../pages/history-training-profile/history-training-profile";
 import {StatisticPage} from "../pages/statistic/statistic";
 import { StatisticServiceProvider } from '../providers/statistic-service/statistic-service';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { StatisticServiceProvider } from '../providers/statistic-service/statist
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    ChartsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

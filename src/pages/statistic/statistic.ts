@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {StatisticServiceProvider} from "../../providers/statistic-service/statistic-service";
+import {StatisticChartColors} from "../../consts/statistic";
 
 @Component({
   selector: 'page-statistic',
@@ -7,11 +8,23 @@ import {StatisticServiceProvider} from "../../providers/statistic-service/statis
 })
 export class StatisticPage {
 
+  statisticChartColors = StatisticChartColors;
   viewState: string;
 
-  userWeight: number;
-  currentWeight: number;
-  weightMessage: string;
+
+  trainingsDates = [];
+
+  public lineChartData:Array<any> = [
+    {
+      data: []
+    }
+  ];
+
+  public lineChartOptions:any = {
+    responsive: true
+  };
+
+  public lineChartType:string = 'line';
 
   constructor(
     private statisticService: StatisticServiceProvider
@@ -25,16 +38,22 @@ export class StatisticPage {
     if (this.viewState == 'empty') {
       return;
     }
+    this.getTrainingsDates();
+    this.setWeightChangeArray();
 
-    this.userWeight = this.statisticService.testUser.weight;
-    this.currentWeight = this.statisticService.getCurrentWeight();
+  }
 
-    const weightChange = this.statisticService.getWeightChange();
-    this.weightMessage = weightChange < 0 ? `Набрано ${Math.abs(weightChange)}` : `Сброшено ${Math.abs(weightChange)}`;
+  getTrainingsDates() {
+    this.trainingsDates = this.statisticService.getTrainingsDates();
+  }
+
+  setWeightChangeArray() {
+    this.lineChartData[0].data = this.statisticService.getWeightChangeArray();
   }
 
   checkTrainings() {
     this.statisticService.checkTrainings() ? this.viewState = 'view' : this.viewState = 'empty';
   }
+
 
 }

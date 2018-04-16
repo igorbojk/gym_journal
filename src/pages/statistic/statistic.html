@@ -19,13 +19,19 @@
       empty
     </div>
     <div *ngSwitchCase="'view'">
-      <p>
-        Собственный вес:
-      </p>
-      <p>Было: {{userWeight}} кг</p>
-      <p>Стало: {{currentWeight}} кг</p>
-      <p>{{weightMessage}} кг</p>
+      <p>Изменение веса</p>
+      <canvas baseChart
+              [datasets]="lineChartData"
+              [labels]="trainingsDates"
+              [options]="lineChartOptions"
+              [colors]="statisticChartColors"
+              [legend]="false"
+              [chartType]="lineChartType">
+      </canvas>
+
     </div>
   </div>
+
+
 
 </ion-content>
