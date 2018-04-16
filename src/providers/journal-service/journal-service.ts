@@ -58,6 +58,10 @@ export class JournalServiceProvider {
   }
 
   editExercise(trainingId, exerciseId, exercise) {
+    exercise.repetitions = [];
+    for (let i = 1; i <= exercise.repetitionsCount; i++) {
+      exercise.repetitions.push({});
+    }
     const currentExercise = this.journal.trainings.find(i => i.id === trainingId).exercises.find(i => i.id == exerciseId);
     Object.assign(currentExercise, exercise);
   }

@@ -4,15 +4,19 @@ page-current-training {
   }
   .exercise-block{
     padding: 0;
-    border-right: solid 1px #488aff;
-    border-bottom: solid 1px #488aff;
+    border-right: solid 2px #488aff;
+    border-bottom: solid 2px #488aff;
     &:nth-child(3n + 1) {
-      border-left: solid 1px #488aff;
+      border-left: solid 2px #488aff;
     }
     &:nth-child(1),
     &:nth-child(2),
     &:nth-child(3) {
-      border-top: solid 1px #488aff;
+      border-top: solid 2px #488aff;
     }
+  }
+  .flex-container{
+    display: flex;
+    align-items: center;
   }
 }

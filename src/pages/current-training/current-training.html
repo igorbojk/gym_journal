@@ -7,7 +7,7 @@
 </ion-header>
 
 
-<ion-content >
+<ion-content>
 
   <ion-grid>
 
@@ -20,10 +20,20 @@
           <ion-col col-4 *ngFor="let repetition of exercise.repetitions" class="exercise-block">
             <ion-row>
               <ion-col col-12>
-                <ion-input type="number" placeholder="Повторения" [(ngModel)]="repetition.repetition"></ion-input>
+                <div class="flex-container">
+                  <ion-input type="number" [(ngModel)]="repetition.repetition"></ion-input>
+                  <span>
+                    повт.
+                  </span>
+                </div>
               </ion-col>
               <ion-col col-12>
-                <ion-input type="number" placeholder="Вес" [(ngModel)]="repetition.weight"></ion-input>
+                <div class="flex-container">
+                  <ion-input type="number" [(ngModel)]="repetition.weight"></ion-input>
+                  <span>
+                    кг
+                  </span>
+                </div>
               </ion-col>
             </ion-row>
           </ion-col>

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {JournalServiceProvider} from "../../providers/journal-service/journal-service";
-import {App, NavParams} from "ionic-angular";
+import {ActionSheetController, App, NavParams, Platform} from "ionic-angular";
 import {TabsPage} from "../tabs/tabs";
 import {Training} from "../../declarations/gym-journal.declaration";
 @Component({
@@ -17,8 +17,13 @@ export class CurrentTrainingPage implements OnInit{
   constructor(
     private journalService: JournalServiceProvider,
     private navParams: NavParams,
-    private app: App
+    private app: App,
+    private platform: Platform,
+    private actionSheetCtrl: ActionSheetController
   ) {
+    platform.registerBackButtonAction(() => {
+      this.openMenu();
+    },1);
   }
 
   ngOnInit() {
@@ -36,6 +41,26 @@ export class CurrentTrainingPage implements OnInit{
     const training = this.journalService.getCurrentTraining(this.trainingId);
     this.currentTraining = JSON.parse(JSON.stringify(training));
     console.log(this.currentTraining);
+  }
+
+  openMenu() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Вы уверены, что хотите остановить треннировку?',
+      buttons: [
+        {
+          text: 'Остановить',
+          handler: () => {
+            this.stopTraining();
+          }
+        },
+        {
+          text: 'Отмена',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
 
 }

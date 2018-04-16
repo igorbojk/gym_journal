@@ -85,7 +85,9 @@ export class JournalPage implements OnInit{
   }
 
   openStartingTrainingMenu() {
+    const isShowTitle = !this.generateButtonsForTrainings().length;
     let actionSheet = this.actionSheetCtrl.create({
+      title: isShowTitle ? 'Нет треннировок с упражнениями' : '',
       buttons: this.generateButtonsForTrainings()
     });
     actionSheet.present();
@@ -94,7 +96,10 @@ export class JournalPage implements OnInit{
   generateButtonsForTrainings() {
     const buttons = [];
 
-    this.currentJournal.trainings.forEach((element) => {
+    this.currentJournal.trainings.forEach((element, index) => {
+      if(!this.currentJournal.trainings[index].exercises.length) {
+        return;
+      }
       buttons.push(
         {
           text: element.title,

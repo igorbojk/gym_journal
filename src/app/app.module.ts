@@ -16,6 +16,7 @@ import {TrainingProfilePage} from "../pages/training-profile/training-profile";
 import {CalendarPage} from "../pages/calendar/calendar";
 import { MomentServiceProvider } from '../providers/moment-service/moment-service';
 import {CurrentTrainingPage} from "../pages/current-training/current-training";
+import { DeviceEventsProvider } from '../providers/device-events/device-events';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {CurrentTrainingPage} from "../pages/current-training/current-training";
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserServiceProvider,
     JournalServiceProvider,
-    MomentServiceProvider
+    MomentServiceProvider,
+    DeviceEventsProvider
   ]
 })
 export class AppModule {}
