@@ -1,0 +1,40 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{training.title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <p>Начало в:</p>
+  <p>{{getTrainingDate(training.startAt)}}</p>
+  <p>Окончание в:</p>
+  <p>{{getTrainingDate(training.stopAt)}}</p>
+  <p>Продолжительность: {{getDuration(training.startAt, training.stopAt)}}</p>
+
+  <ion-grid>
+    <ion-row *ngFor="let exercise of training.exercises">
+      <ion-col col-12>
+        {{exercise.title}}
+      </ion-col>
+      <ion-col col-12 *ngFor="let repetition of exercise.repetitions; let index = index" class="exercise-row">
+        <ion-row>
+          <ion-col col-4 class="exercise-col">
+            Подход №{{index+1}}
+          </ion-col>
+          <ion-col col-4 class="exercise-col">
+            <span>{{repetition.repetition}}</span>
+            <span>повт.</span>
+          </ion-col>
+          <ion-col col-4 class="exercise-col">
+            <span>{{repetition.weight}}</span>
+            <span>кг</span>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

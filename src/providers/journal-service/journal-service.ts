@@ -11,7 +11,29 @@ export class JournalServiceProvider {
         {
           id: Math.random().toString(36).substr(2, 9),
           title: 'Бицепс/трицепс',
-          exercises: []
+          exercises: [
+            {
+              id: Math.random().toString(36).substr(2, 9),
+              title: 'test',
+              repetitionsCount: 5,
+              repetitions: [
+                {},
+                {},
+                {},
+                {},
+                {}
+              ]
+            },
+            {
+              id: Math.random().toString(36).substr(2, 9),
+              title: 'test2',
+              repetitionsCount: 2,
+              repetitions: [
+                {},
+                {}
+              ]
+            }
+          ]
         },
         {
           id: Math.random().toString(36).substr(2, 9),
@@ -89,4 +111,7 @@ export class JournalServiceProvider {
     currentTraining.stopAt = Date.now();
   }
 
+  getHistoryTraining(trainingId) {
+    return this.calendar.find(i => i.id === trainingId);
+  }
 }

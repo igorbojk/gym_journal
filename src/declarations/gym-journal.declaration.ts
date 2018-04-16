@@ -13,7 +13,8 @@ export interface Training {
 export interface Exercise {
   id: string;
   title: string;
-  repetitions: number;
+  repetitions: Repetition[];
+  repetitionsCount: number;
 }
 
 export interface  Repetition {

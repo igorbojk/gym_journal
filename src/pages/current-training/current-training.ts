@@ -48,7 +48,7 @@ export class CurrentTrainingPage implements OnInit{
       title: 'Вы уверены, что хотите выйти? При выходе будет остановленна треннировка.',
       buttons: [
         {
-          text: 'Остановить',
+          text: 'Выйти',
           handler: () => {
             this.stopTraining();
             this.platform.exitApp();

@@ -16,7 +16,7 @@ import {TrainingProfilePage} from "../pages/training-profile/training-profile";
 import {CalendarPage} from "../pages/calendar/calendar";
 import { MomentServiceProvider } from '../providers/moment-service/moment-service';
 import {CurrentTrainingPage} from "../pages/current-training/current-training";
-import { DeviceEventsProvider } from '../providers/device-events/device-events';
+import {HistoryTrainingProfilePage} from "../pages/history-training-profile/history-training-profile";
 
 @NgModule({
   declarations: [
@@ -28,7 +28,8 @@ import { DeviceEventsProvider } from '../providers/device-events/device-events';
     JournalPage,
     TrainingProfilePage,
     CalendarPage,
-    CurrentTrainingPage
+    CurrentTrainingPage,
+    HistoryTrainingProfilePage
   ],
   imports: [
     BrowserModule,
@@ -44,7 +45,8 @@ import { DeviceEventsProvider } from '../providers/device-events/device-events';
     JournalPage,
     TrainingProfilePage,
     CalendarPage,
-    CurrentTrainingPage
+    CurrentTrainingPage,
+    HistoryTrainingProfilePage
   ],
   providers: [
     StatusBar,
@@ -52,8 +54,7 @@ import { DeviceEventsProvider } from '../providers/device-events/device-events';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserServiceProvider,
     JournalServiceProvider,
-    MomentServiceProvider,
-    DeviceEventsProvider
+    MomentServiceProvider
   ]
 })
 export class AppModule {}

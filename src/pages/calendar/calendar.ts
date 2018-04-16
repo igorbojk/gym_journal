@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {JournalServiceProvider} from "../../providers/journal-service/journal-service";
 import {MomentServiceProvider} from "../../providers/moment-service/moment-service";
+import {NavController} from "ionic-angular";
+import {HistoryTrainingProfilePage} from "../history-training-profile/history-training-profile";
 @Component({
   selector: 'page-calendar',
   templateUrl: 'calendar.html',
@@ -11,7 +13,8 @@ export class CalendarPage implements OnInit{
 
   constructor(
     private journalService: JournalServiceProvider,
-    private momentService: MomentServiceProvider
+    private momentService: MomentServiceProvider,
+    private navCtrl: NavController
   ) {
   }
 
@@ -27,6 +30,10 @@ export class CalendarPage implements OnInit{
   getDuration(start, end) {
     const duration = end - start;
     return this.momentService.getDuration(duration);
+  }
+
+  openTrainingInfo(trainingId) {
+    this.navCtrl.push(HistoryTrainingProfilePage, {trainingId: trainingId});
   }
 
 }

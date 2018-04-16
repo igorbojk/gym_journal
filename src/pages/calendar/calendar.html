@@ -14,20 +14,12 @@
 
 
 <ion-content>
-  <ion-card *ngFor="let training of calendar">
+  <ion-card *ngFor="let training of calendar" (tap)="openTrainingInfo(training.id)">
     <ion-card-header>
       <span>Название:</span>
       {{training.title}}
     </ion-card-header>
     <ion-card-content>
-      <div>
-        <p>Начало в:</p>
-        <p>{{getTrainingDate(training.startAt)}}</p>
-      </div>
-      <div>
-        <p>Окончание в:</p>
-        <p>{{getTrainingDate(training.stopAt)}}</p>
-      </div>
       <div>
         <p>Продолжительность: {{getDuration(training.startAt, training.stopAt)}}</p>
       </div>

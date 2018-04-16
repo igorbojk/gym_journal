@@ -1,0 +1,19 @@
+page-history-training-profile {
+  .exercise-row {
+    border: solid 1px #488aff;
+    border-bottom: none;
+    &:last-child {
+      border-bottom: solid 1px #488aff;
+    }
+    .exercise-col{
+      text-align: center;
+      border-right: solid 1px #488aff;
+      &:first-child {
+        text-align: left;
+      }
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+}
