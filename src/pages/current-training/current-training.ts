@@ -45,12 +45,13 @@ export class CurrentTrainingPage implements OnInit{
 
   openMenu() {
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Вы уверены, что хотите остановить треннировку?',
+      title: 'Вы уверены, что хотите выйти? При выходе будет остановленна треннировка.',
       buttons: [
         {
           text: 'Остановить',
           handler: () => {
             this.stopTraining();
+            this.platform.exitApp();
           }
         },
         {
