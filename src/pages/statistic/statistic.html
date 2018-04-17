@@ -13,7 +13,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content >
   <div [ngSwitch]="viewState">
     <div *ngSwitchCase="'empty'" class="empty-state">
       <p>
@@ -22,23 +22,22 @@
       </p>
     </div>
     <div *ngSwitchCase="'view'">
-      <p>Изменение веса</p>
+      <p class="title bold">Изменение веса</p>
       <canvas baseChart
               [datasets]="lineChartData"
-              [labels]="trainingsDates"
+              [labels]="trainingsDates['all']"
               [options]="lineChartOptions"
               [colors]="statisticChartColors"
               [legend]="false"
               [chartType]="'line'">
       </canvas>
-      <p>Статистика по треннировкам</p>
-      <div *ngFor="let training of trainings">
-        <p>{{training.title}}</p>
+      <div *ngFor="let training of trainings" class="training-block">
+        <h4 class="title bold">{{training.title}}</h4>
         <div *ngFor="let exercise of training.exercises">
-          <p>{{exercise.title}}(максимальный вес)</p>
+          <p class="title">{{exercise.title}} (максимальный вес)</p>
           <canvas baseChart
                   [datasets]="chartData[exercise.title]"
-                  [labels]="trainingsDates"
+                  [labels]="trainingsDates[training.title]"
                   [options]="lineChartOptions"
                   [colors]="statisticChartColors"
                   [legend]="false"

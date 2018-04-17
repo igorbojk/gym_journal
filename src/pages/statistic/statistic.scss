@@ -1,3 +1,18 @@
 page-statistic {
+  .title {
+    padding: 4px 8px;
+  }
+  .bold {
+    font-weight: 600;
 
+  }
+  .training-block {
+    margin: 4px;
+    box-sizing: border-box;
+    h4 {
+      margin-top: 4px;
+      background: #488aff;
+
+    }
+  }
 }

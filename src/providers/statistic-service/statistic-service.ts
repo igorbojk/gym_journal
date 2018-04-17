@@ -22,10 +22,9 @@ export class StatisticServiceProvider {
     return trainingsDates;
   }
 
-  getCurrentTrainingsDates(title) {
+  getTrainingDates(title) {
     const trainingsDates = [];
-    const filteredTrainings = this.journalService.calendar.filter(i => i.title == title);
-    filteredTrainings.forEach((element) => {
+    this.journalService.calendar.filter(i => i.title == title).forEach((element) => {
       trainingsDates.push(this.momentService.getDate(element.startAt));
     });
     return trainingsDates;

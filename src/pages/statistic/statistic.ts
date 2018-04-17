@@ -15,9 +15,7 @@ export class StatisticPage implements OnInit{
 
   statisticChartColors = StatisticChartColors;
   viewState: string;
-  trainingsDates = [];
-  currentTraining;
-  currentTrainingDates = [];
+  trainingsDates = {};
   public lineChartData:Array<any> = [];
   public lineChartOptions:any = {
     responsive: true
@@ -48,11 +46,12 @@ export class StatisticPage implements OnInit{
   }
 
   getTrainingsDates() {
-    this.trainingsDates = this.statisticService.getTrainingsDates();
+    this.trainingsDates['all'] = this.statisticService.getTrainingsDates();
   }
 
   generateExercisesMaxWeight() {
     this.trainings.forEach((element) => {
+      this.trainingsDates[element.title] = this.statisticService.getTrainingDates(element.title);
       element.exercises.forEach((i) => {
         const data = this.statisticService.getExerciseMaxWeight(element.title, i.title);
         this.chartData[i.title] = [];
@@ -70,10 +69,6 @@ export class StatisticPage implements OnInit{
 
   checkTrainings() {
     this.statisticService.checkTrainings() ? this.viewState = 'view' : this.viewState = 'empty';
-  }
-
-  getExerciseMaxWeight(exercisetitle) {
-    return this.statisticService.getExerciseMaxWeight(this.currentTraining.title, exercisetitle);
   }
 
 
