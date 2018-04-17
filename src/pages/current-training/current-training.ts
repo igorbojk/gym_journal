@@ -45,10 +45,6 @@ export class CurrentTrainingPage implements OnInit{
     this.currentTraining = JSON.parse(JSON.stringify(training));
   }
 
-  test() {
-    this.journalService.deleteActiveTraining();
-  }
-
   // isHaveEmptyFields() {
   //   let isHaveEmptyExercise;
   //   this.currentTraining.exercises.forEach((element) => {
