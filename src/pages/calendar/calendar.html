@@ -14,6 +14,13 @@
 
 
 <ion-content>
+  <div *ngIf="!calendar.length" class="empty-state">
+    <p>
+      Еще не проводилось ни одной треннировки для записей в календаре.
+      Проведите треннировку чтобы она отображалась в календаре
+    </p>
+  </div>
+
   <ion-card *ngFor="let training of calendar" (tap)="openTrainingInfo(training.id)">
     <ion-card-header>
       <span>Название:</span>

@@ -13,8 +13,7 @@
 </ion-header>
 
 
-<ion-content >
-  <div [ngSwitch]="viewState">
+<ion-content [ngSwitch]="viewState">
     <div *ngSwitchCase="'empty'" class="empty-state">
       <p>
         Еще не проводилось ни одной треннировки для статистики.
@@ -47,7 +46,6 @@
       </div>
 
     </div>
-  </div>
 
 
 
