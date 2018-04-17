@@ -22,9 +22,7 @@ export class CurrentTrainingPage implements OnInit{
     private actionSheetCtrl: ActionSheetController,
     private toastCtrl: ToastController
   ) {
-    platform.registerBackButtonAction(() => {
-      this.openMenu();
-    },1);
+
   }
 
   ngOnInit() {
@@ -47,25 +45,8 @@ export class CurrentTrainingPage implements OnInit{
     this.currentTraining = JSON.parse(JSON.stringify(training));
   }
 
-  openMenu() {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Вы уверены, что хотите выйти? Треннировка не будет сохранена.',
-      buttons: [
-        {
-          text: 'Выйти',
-          handler: () => {
-            this.journalService.deleteHistoryTraining(this.trainingIdToSave);
-            this.platform.exitApp();
-          }
-        },
-        {
-          text: 'Отмена',
-          handler: () => {
-          }
-        }
-      ]
-    });
-    actionSheet.present();
+  test() {
+    this.journalService.deleteActiveTraining();
   }
 
   // isHaveEmptyFields() {

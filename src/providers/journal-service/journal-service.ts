@@ -100,10 +100,8 @@ export class JournalServiceProvider {
   }
 
 
-  deleteHistoryTraining(trainingId) {
-    console.log(this.calendar);
-    this.calendar = this.calendar.filter(i => i.id !== trainingId);
-    console.log(this.calendar);
+  deleteActiveTraining() {
+    this.calendar = this.calendar.filter(i => i.stopAt );
   }
 
   getHistoryTraining(trainingId) {
