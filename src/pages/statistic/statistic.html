@@ -32,14 +32,13 @@
               [chartType]="'line'">
       </canvas>
       <p>Статистика по треннировкам</p>
-      <button (tap)="openChartSortingMenu()" ion-button full >Выбрать треннировку</button>
-      <div *ngIf="currentTraining">
-        <p>{{currentTraining.title}}</p>
-        <div *ngFor="let exercise of currentTraining.exercises">
-          <p>{{exercise.title}}</p>
+      <div *ngFor="let training of trainings">
+        <p>{{training.title}}</p>
+        <div *ngFor="let exercise of training.exercises">
+          <p>{{exercise.title}}(максимальный вес)</p>
           <canvas baseChart
-                  [datasets]="getExerciseMaxWeight(exercise.title)"
-                  [labels]="currentTrainingDates"
+                  [datasets]="chartData[exercise.title]"
+                  [labels]="trainingsDates"
                   [options]="lineChartOptions"
                   [colors]="statisticChartColors"
                   [legend]="false"
@@ -47,6 +46,7 @@
           </canvas>
         </div>
       </div>
+
     </div>
   </div>
 

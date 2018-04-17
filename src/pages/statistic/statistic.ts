@@ -1,13 +1,17 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {StatisticServiceProvider} from "../../providers/statistic-service/statistic-service";
 import {StatisticChartColors} from "../../consts/statistic";
-import {ActionSheetController} from "ionic-angular";
 
 @Component({
   selector: 'page-statistic',
   templateUrl: 'statistic.html',
 })
-export class StatisticPage {
+export class StatisticPage implements OnInit{
+
+  trainings = [];
+
+  chartData = {};
+  test = false;
 
   statisticChartColors = StatisticChartColors;
   viewState: string;
@@ -20,9 +24,11 @@ export class StatisticPage {
   };
 
   constructor(
-    private statisticService: StatisticServiceProvider,
-    private actionSheetCtrl: ActionSheetController
+    private statisticService: StatisticServiceProvider
   ) {
+  }
+
+  ngOnInit() {
     this.checkTrainings();
     this.generateStatistic();
   }
@@ -33,10 +39,26 @@ export class StatisticPage {
     }
     this.getTrainingsDates();
     this.setWeightChangeArray();
+    this.getTrainings();
+    this.generateExercisesMaxWeight()
+  }
+
+  getTrainings() {
+    this.trainings = this.statisticService.getTrainings();
   }
 
   getTrainingsDates() {
     this.trainingsDates = this.statisticService.getTrainingsDates();
+  }
+
+  generateExercisesMaxWeight() {
+    this.trainings.forEach((element) => {
+      element.exercises.forEach((i) => {
+        const data = this.statisticService.getExerciseMaxWeight(element.title, i.title);
+        this.chartData[i.title] = [];
+        this.chartData[i.title].push({data});
+      });
+    });
   }
 
   setWeightChangeArray() {
@@ -50,46 +72,9 @@ export class StatisticPage {
     this.statisticService.checkTrainings() ? this.viewState = 'view' : this.viewState = 'empty';
   }
 
-  setTraining(element) {
-    this.currentTraining = element;
-    this.getCurrentTrainingDates();
-  }
-
-  getCurrentTrainingDates() {
-    this.currentTrainingDates = this.statisticService.getCurrentTrainingsDates(this.currentTraining.title);
-  }
-
-
   getExerciseMaxWeight(exercisetitle) {
     return this.statisticService.getExerciseMaxWeight(this.currentTraining.title, exercisetitle);
   }
 
-  openChartSortingMenu() {
-    const isShowTitle = !this.generateButtonsForTrainings().length;
-    let actionSheet = this.actionSheetCtrl.create({
-      title: isShowTitle ? 'Нет треннировок с упражнениями' : '',
-      buttons: this.generateButtonsForTrainings()
-    });
-    actionSheet.present();
-  }
-
-  generateButtonsForTrainings() {
-    const buttons = [];
-    const trainings = this.statisticService.getJournalTrainings();
-    trainings.forEach((element, index) => {
-      if(!trainings[index].exercises.length) {
-        return;
-      }
-      buttons.push(
-        {
-          text: element.title,
-          handler: () => {
-            this.setTraining(element);
-          }
-        }
-      );
-    });
-    return buttons;
-  }
 
 }

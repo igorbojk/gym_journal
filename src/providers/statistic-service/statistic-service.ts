@@ -41,19 +41,14 @@ export class StatisticServiceProvider {
     return weightChangeArray;
   }
 
-  getJournalTrainings() {
-    const trainings = [];
-    this.journalService.journal.trainings.forEach((element) => {
-      trainings.push(element);
-    });
-    return trainings;
-  }
-
   getExerciseMaxWeight(trainingTitle, exerciseTitle) {
 
     const maxWeightArray = [];
     const filteredTrainings = this.journalService.calendar.filter(i => i.title == trainingTitle);
     filteredTrainings.forEach((element) => {
+      if(!element.exercises.find(element => element.title == exerciseTitle)) {
+        maxWeightArray.push(null);
+      }
       element.exercises.filter(el => el.title == exerciseTitle).forEach((exercise) => {
         const weightArray = exercise.repetitions.map(i => i.weight);
         const maxWeight = Math.max.apply( Math, weightArray );
@@ -63,17 +58,8 @@ export class StatisticServiceProvider {
     return maxWeightArray;
   }
 
-  getMaxWeightForExercise(trainingTitle, exerciseTitle) {
-    const maxWeightArray = [];
-    const filteredTrainings = this.journalService.calendar.filter(i => i.title == trainingTitle);
-    filteredTrainings.forEach((element) => {
-      element.exercises.filter(el => el.title == exerciseTitle).forEach((exercise) => {
-        const weightArray = exercise.repetitions.map(i => i.weight);
-        const maxWeight = Math.max.apply( Math, weightArray );
-        maxWeightArray.push(maxWeight);
-      });
-    });
-    return maxWeightArray;
+  getTrainings() {
+    return this.journalService.journal.trainings.filter(i => i.exercises.length);
   }
 
 }
