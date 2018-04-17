@@ -45,7 +45,7 @@ export class StatisticServiceProvider {
     const maxWeightArray = [];
     const filteredTrainings = this.journalService.calendar.filter(i => i.title == trainingTitle);
     filteredTrainings.forEach((element) => {
-      if(!element.exercises.find(element => element.title == exerciseTitle)) {
+      if(!element.exercises.find(elem => elem.title == exerciseTitle)) {
         maxWeightArray.push(null);
       }
       element.exercises.filter(el => el.title == exerciseTitle).forEach((exercise) => {
