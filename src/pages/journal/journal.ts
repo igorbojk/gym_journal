@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActionSheetController, AlertController, App, NavController, ToastController} from "ionic-angular";
 import {JournalServiceProvider} from "../../providers/journal-service/journal-service";
 import {TrainingProfilePage} from "../training-profile/training-profile";
-import {HistoryTrainingClass, TrainingClass} from "../../declarations/gym-journal.declaration";
+import {HistoryTraining, Training} from "../../declarations/gym-journal.declaration";
 import {CurrentTrainingPage} from "../current-training/current-training";
 
 
@@ -65,7 +65,7 @@ export class JournalPage implements OnInit{
               this.showToast('Введите название');
               return false;
             }
-            const training = new TrainingClass(data.title);
+            const training = new Training(data.title);
             this.journalService.addTraining(training);
           }
         }
@@ -79,7 +79,7 @@ export class JournalPage implements OnInit{
   }
 
   startTraining(training) {
-    const currentTraining = new HistoryTrainingClass(training.title);
+    const currentTraining = new HistoryTraining(training.title);
     this.journalService.startTraining(currentTraining);
     this.app.getRootNav().setRoot(CurrentTrainingPage, {trainingId: training.id, trainingIdToSave: currentTraining.id});
   }

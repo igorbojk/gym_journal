@@ -1,33 +1,41 @@
-export interface Journal {
+export interface IJournal {
   id: string;
   title: string;
-  trainings: Training[];
+  trainings: ITraining[];
 }
 
-export interface Training {
+export interface ITraining {
   id: string;
   title: string;
   weight?: number;
-  exercises: Exercise[];
+  exercises: IExercise[];
 }
 
-export interface Exercise {
+export interface IExercise {
   id: string;
   title: string;
-  repetitions: Repetition[];
+  repetitions: IRepetition[];
   repetitionsCount: number;
 }
 
-export interface  Repetition {
+export interface IRepetition {
   repetition?: number;
   weight?: number;
 }
 
-export class TrainingClass {
-   id: string;
-   title: string;
-   exercises: Exercise[];
+export interface IHistoryTraining {
+  id: string;
+  title: string;
+  startAt: number;
+  stopAt: number;
+  weight: number;
+  exercises: IExercise[];
+}
 
+export class Training {
+  id: string;
+  title: string;
+  exercises: IExercise[];
   constructor(title: string) {
     this.id = Math.random().toString(36).substr(2, 9);
     this.title = title;
@@ -35,12 +43,11 @@ export class TrainingClass {
   }
 }
 
-export class ExerciseClass {
-   id: string;
-   title: string;
+export class Exercise {
+  id: string;
+  title: string;
   repetitionsCount: number;
-  repetitions: Repetition[];
-
+  repetitions: IRepetition[];
   constructor(title: string, repetitionsCount: number) {
     this.id = Math.random().toString(36).substr(2, 9);
     this.title = title;
@@ -49,22 +56,12 @@ export class ExerciseClass {
   }
 }
 
-export interface HistoryTraining {
+
+export class HistoryTraining {
   id: string;
   title: string;
   startAt: number;
   stopAt: number;
-  weight: number;
-  exercises: Exercise[];
-}
-
-export class HistoryTrainingClass {
-
-  id: string;
-  title: string;
-  startAt: number;
-  stopAt: number;
-
   constructor(title: string) {
     this.id = Math.random().toString(36).substr(2, 9);
     this.title = title;

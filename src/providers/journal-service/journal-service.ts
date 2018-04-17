@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {HistoryTraining, Journal} from "../../declarations/gym-journal.declaration";
+import {IHistoryTraining, IJournal} from "../../declarations/gym-journal.declaration";
 
 @Injectable()
 export class JournalServiceProvider {
 
-  journal: Journal = {
+  journal: IJournal = {
       id: Math.random().toString(36).substr(2, 9),
       title: 'Жесткая треннировка',
       trainings: [
@@ -31,7 +31,7 @@ export class JournalServiceProvider {
       ]
     };
 
-  calendar: HistoryTraining[] = [
+  calendar: IHistoryTraining[] = [
 
   ];
 
