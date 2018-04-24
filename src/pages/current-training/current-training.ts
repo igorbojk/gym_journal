@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {JournalServiceProvider} from "../../providers/journal-service/journal-service";
-import {ActionSheetController, App, NavParams, Platform, ToastController} from "ionic-angular";
+import {App, NavParams} from "ionic-angular";
 import {TabsPage} from "../tabs/tabs";
 import {Training} from "../../declarations/gym-journal.declaration";
 @Component({
@@ -18,9 +18,6 @@ export class CurrentTrainingPage implements OnInit{
     private journalService: JournalServiceProvider,
     private navParams: NavParams,
     private app: App,
-    private platform: Platform,
-    private actionSheetCtrl: ActionSheetController,
-    private toastCtrl: ToastController
   ) {
 
   }
@@ -32,10 +29,6 @@ export class CurrentTrainingPage implements OnInit{
   }
 
   stopTraining() {
-    // if(!this.isHaveEmptyFields()) {
-    //   this.showToast('Заполните все поля!');
-    //   return;
-    // }
     this.journalService.stopTraining(this.trainingIdToSave, this.currentTraining);
     this.app.getRootNav().setRoot(TabsPage);
   }
@@ -43,24 +36,7 @@ export class CurrentTrainingPage implements OnInit{
   setCurrentTraining() {
     const training = this.journalService.getCurrentTraining(this.trainingId);
     this.currentTraining = JSON.parse(JSON.stringify(training));
+    delete this.currentTraining.id;
   }
-
-  // isHaveEmptyFields() {
-  //   let isHaveEmptyExercise;
-  //   this.currentTraining.exercises.forEach((element) => {
-  //     isHaveEmptyExercise = element.repetitions.forEach((el) => {
-  //       return el.repetition == undefined || el.weight == undefined;
-  //     });
-  //   });
-  //   return  this.currentTraining.weight && isHaveEmptyExercise;
-  // }
-  //
-  // showToast(message) {
-  //   let toast = this.toastCtrl.create({
-  //     message: message,
-  //     duration: 1500
-  //   });
-  //   toast.present();
-  // }
 
 }
