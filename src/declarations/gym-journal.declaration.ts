@@ -1,6 +1,4 @@
 export interface IJournal {
-  id: string;
-  title: string;
   trainings: ITraining[];
 }
 
