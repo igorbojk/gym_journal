@@ -112,4 +112,33 @@ export class JournalPage implements OnInit{
     return buttons;
   }
 
+  longPressed() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: '',
+      buttons: [
+        {
+          text: 'Редактировать',
+          handler: () => {
+            console.log('edit');
+          }
+        },
+        {
+          text: 'Удалить',
+          handler: () => {
+            console.log('Delete');
+          }
+        },
+        {
+          text: 'Отмена',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+
+
 }

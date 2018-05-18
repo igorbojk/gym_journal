@@ -21,6 +21,7 @@ import {StatisticPage} from "../pages/statistic/statistic";
 import { StatisticServiceProvider } from '../providers/statistic-service/statistic-service';
 import { ChartsModule } from 'ng2-charts';
 import { IonicStorageModule } from '@ionic/storage';
+import { LongPressModule } from 'ionic-long-press';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { IonicStorageModule } from '@ionic/storage';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     ChartsModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    LongPressModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

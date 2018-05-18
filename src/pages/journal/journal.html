@@ -24,12 +24,12 @@
         У вас еще нет ни одной треннировки.
       </p>
       <p>
-        Для добавления треннировки нажмите "+" внизу экрана.
+        Для добавления треннировки нажмите "+" вверху экрана.
       </p>
     </div>
   </div>
 
-  <ion-card *ngFor="let training of currentJournal.trainings" (tap)="openTraining(training.id)">
+  <ion-card *ngFor="let training of currentJournal.trainings" (tap)="openTraining(training.id)" ion-long-press [interval]="400" (onPressStart)="longPressed()">
     <ion-card-header>
       <span>Название:</span>
       {{training.title}}
