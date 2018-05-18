@@ -118,4 +118,13 @@ export class JournalServiceProvider {
   getHistoryTraining(trainingId) {
     return this.calendar.find(i => i.id === trainingId);
   }
+
+  renameHistoryTrainings(oldTitle, newTitle){
+    this.calendar.forEach(i => {
+      if (i.title == oldTitle) {
+        i.title = newTitle;
+      }
+    });
+    this.saveCalendar();
+  }
 }

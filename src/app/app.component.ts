@@ -32,6 +32,7 @@ export class MyApp {
               !calendar ?  this.journalService.setDefaultCalendar() : this.journalService.setCalendar(calendar);
               this.journalService.deleteActiveTraining();
               this.rootPage = TabsPage;
+              console.log(this.journalService.calendar);
               splashScreen.hide();
             }
           );

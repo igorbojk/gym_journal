@@ -167,6 +167,7 @@ export class JournalPage implements OnInit{
               this.showToast('Введите название');
               return false;
             }
+            this.journalService.renameHistoryTrainings(training.title, data.title);
             this.journalService.updateTraining(training.id, data);
             this.activeId = null;
           }

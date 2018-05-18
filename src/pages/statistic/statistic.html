@@ -35,7 +35,7 @@
         <div *ngFor="let exercise of training.exercises">
           <p class="title">{{exercise.title}} (максимальный вес)</p>
           <canvas baseChart
-                  [datasets]="chartData[training.title][exercise.title]"
+                  [datasets]="chartData[training.title] ? chartData[training.title][exercise.title] : [{data: ''}]"
                   [labels]="trainingsDates[training.title]"
                   [options]="lineChartOptions"
                   [colors]="statisticChartColors"

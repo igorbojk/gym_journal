@@ -55,8 +55,7 @@ export class StatisticPage implements OnInit{
       this.chartData[element.title]={};
       element.exercises.forEach((i) => {
         const data = this.statisticService.getExerciseMaxWeight(element.title, i.title);
-        this.chartData[element.title][i.title] = [];
-        this.chartData[element.title][i.title].push({data});
+        this.chartData[element.title][i.title] = [{data}];
       });
     });
   }
