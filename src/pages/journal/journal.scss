@@ -5,5 +5,12 @@ page-journal {
       vertical-align: middle;
     }
   }
+  .card.active{
+    background: #b9b9b9;
+    color: white;
+    .card-header-md{
+      color: white;
+    }
+  }
 
 }

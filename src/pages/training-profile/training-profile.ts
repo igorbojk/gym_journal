@@ -158,42 +158,4 @@ export class TrainingProfilePage implements OnInit {
   }
 
 
-  deleteTraining() {
-    this.navCtrl.popToRoot();
-    this.journalService.deleteTraining(this.trainingId);
-    this.showToast('треннировку удалено');
-  }
-
-  editTraining() {
-    let promt = this.alertCtrl.create({
-      title: 'Введите название треннировки',
-      inputs: [
-        {
-          name: 'title',
-          placeholder: 'Введите название',
-          value: this.training.title
-        }
-      ],
-      buttons: [
-        {
-          text: 'Отмена',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Сохранить',
-          handler: (data) => {
-            if(!data.title.length) {
-              this.showToast('Введите название');
-              return false;
-            }
-            this.journalService.updateTraining(this.trainingId, data);
-          }
-        }
-      ]
-    });
-    promt.present();
-  }
-
 }

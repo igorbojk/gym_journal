@@ -15,20 +15,8 @@
 
 <ion-content>
 
-  <ion-fab right top edge>
-    <button ion-fab color="dark"><ion-icon name="build"></ion-icon></button>
-    <ion-fab-list side="bottom">
-      <button ion-fab (tap)="editTraining()">
-        <ion-icon name="create" ></ion-icon>
-      </button>
-      <button ion-fab (tap)="deleteTraining()">
-        <ion-icon name="trash"></ion-icon>
-      </button>
-    </ion-fab-list>
-  </ion-fab>
-
   <ion-fab bottom right>
-    <button ion-fab color="danger" (tap)="addExercise()">
+    <button ion-fab color="dark" (tap)="addExercise()">
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>

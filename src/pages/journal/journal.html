@@ -12,7 +12,7 @@
 
 <ion-content >
 
-  <ion-fab right top edge >
+  <ion-fab bottom right >
     <button ion-fab color="dark" (tap)="addTraining()">
       <ion-icon name="add"></ion-icon>
     </button>
@@ -28,8 +28,7 @@
       </p>
     </div>
   </div>
-
-  <ion-card *ngFor="let training of currentJournal.trainings" (tap)="openTraining(training.id)" ion-long-press [interval]="400" (onPressStart)="longPressed()">
+  <ion-card *ngFor="let training of currentJournal.trainings" (tap)="openTraining(training.id)" ion-long-press [interval]="400" (onPressStart)="longPressed(training)" [ngClass]="{'active': training.id == activeId}">
     <ion-card-header>
       <span>Название:</span>
       {{training.title}}
@@ -40,7 +39,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-fab bottom right *ngIf="currentJournal.trainings.length">
+  <ion-fab  right top edge *ngIf="currentJournal.trainings.length">
     <button ion-fab color="danger" (tap)="openStartingTrainingMenu()"><ion-icon name="play"></ion-icon></button>
   </ion-fab>
 

@@ -14,6 +14,7 @@ import {CurrentTrainingPage} from "../current-training/current-training";
 export class JournalPage implements OnInit{
 
   currentJournal: any;
+  activeId: any;
 
   constructor(
     private navCtrl: NavController,
@@ -112,31 +113,73 @@ export class JournalPage implements OnInit{
     return buttons;
   }
 
-  longPressed() {
+  longPressed(training) {
+    this.activeId = training.id;
+
     let actionSheet = this.actionSheetCtrl.create({
       title: '',
+      enableBackdropDismiss: false,
       buttons: [
         {
           text: 'Редактировать',
           handler: () => {
-            console.log('edit');
+            this.editTraining(training);
           }
         },
         {
           text: 'Удалить',
           handler: () => {
-            console.log('Delete');
+            this.deleteTraining(training);
           }
         },
         {
           text: 'Отмена',
           handler: () => {
-            console.log('Cancel clicked');
+            this.activeId = null;
           }
         }
       ]
     });
     actionSheet.present();
+  }
+
+  editTraining(training) {
+    let promt = this.alertCtrl.create({
+      title: 'Введите название треннировки',
+      inputs: [
+        {
+          name: 'title',
+          placeholder: 'Введите название',
+          value: training.title
+        }
+      ],
+      buttons: [
+        {
+          text: 'Отмена',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Сохранить',
+          handler: (data) => {
+            if(!data.title.length) {
+              this.showToast('Введите название');
+              return false;
+            }
+            this.journalService.updateTraining(training.id, data);
+            this.activeId = null;
+          }
+        }
+      ]
+    });
+    promt.present();
+  }
+
+  deleteTraining(training) {
+    this.navCtrl.popToRoot();
+    this.journalService.deleteTraining(training.id);
+    this.showToast('треннировку удалено');
   }
 
 
