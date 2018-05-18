@@ -30,6 +30,7 @@ export class MyApp {
           this.storage.get('calendar').then(
             calendar => {
               !calendar ?  this.journalService.setDefaultCalendar() : this.journalService.setCalendar(calendar);
+              this.journalService.deleteActiveTraining();
               this.rootPage = TabsPage;
               splashScreen.hide();
             }
