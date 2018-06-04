@@ -27,17 +27,11 @@ export class TrainingProfilePage implements OnInit {
   }
 
   ngOnInit() {
-    this.setCurrentTraining();
     this.firebaseService.getTraining(this.navParams.get('trainingId')).subscribe(
       result => {
         this.training = result;
       }
     );
-  }
-
-  setCurrentTraining() {
-
-    // this.training = this.journalService.getTraining(this.trainingId);
   }
 
   addExercise() {
@@ -73,7 +67,11 @@ export class TrainingProfilePage implements OnInit {
                 return false;
               }
               const exercise = new Exercise(data.title, data.repetitionsCount);
-              // this.journalService.addExercise(this.trainingId, exercise);
+              if(!this.training.exercises){
+                this.training.exercises = [];
+              }
+              this.training.exercises.push(exercise);
+              this.firebaseService.updateTraining(this.training.$key, this.training);
               this.showToast(`${data.title} добавлен`);
             }
           }
@@ -126,7 +124,9 @@ export class TrainingProfilePage implements OnInit {
               return false;
             }
             data.repetitionsCount = +data.repetitionsCount;
-            // this.journalService.editExercise(this.trainingId, exercise.id, data);
+            const updateExercise = this.training.exercises.find(i => i.id == exercise.id);
+            Object.assign(updateExercise, data);
+            this.firebaseService.updateTraining(this.training.$key, this.training);
             this.showToast('Сохранено');
           }
         }
@@ -158,7 +158,8 @@ export class TrainingProfilePage implements OnInit {
   }
 
   deleteExercise(exercise) {
-    // this.journalService.deleteExercise(this.trainingId, exercise);
+    this.training.exercises = this.training.exercises.filter(i => i.id !== exercise.id);
+    this.firebaseService.updateTraining(this.training.$key, this.training);
     this.showToast('Упражнение удалено');
   }
 

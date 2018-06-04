@@ -45,10 +45,6 @@ export class JournalPage implements OnInit{
     )
   }
 
-  setCurrentJournal() {
-    // this.currentJournal = this.journalService.getJournal();
-  }
-
   showToast(message) {
     let toast = this.toastCtrl.create({
       message: message,
