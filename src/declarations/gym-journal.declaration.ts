@@ -33,6 +33,7 @@ export interface IHistoryTraining {
 export class Training {
   title: string;
   exercises: IExercise[];
+  stopAt?: number;
   constructor(title: string) {
     this.title = title;
     this.exercises = [];

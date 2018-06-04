@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {AngularFireDatabase} from "angularfire2/database";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class FirebaseServiceProvider {
@@ -25,6 +26,18 @@ export class FirebaseServiceProvider {
 
   updateTraining(id, training) {
     return this.angularFireBase.list('/trainings/').update(id, training);
+  }
+
+  startTraining(training){
+    return this.angularFireBase.list('/calendar/').push(training);
+  }
+
+  getCalendar(){
+    return this.angularFireBase.list('/calendar/');
+  }
+
+  stopTraining(saveId, training){
+    return this.angularFireBase.list('/calendar/').update(saveId, training);
   }
 
 }

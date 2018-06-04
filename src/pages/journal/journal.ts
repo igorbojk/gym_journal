@@ -91,8 +91,8 @@ export class JournalPage implements OnInit{
 
   startTraining(training) {
     const currentTraining = new HistoryTraining(training.title);
-    // this.journalService.startTraining(currentTraining);
-    this.app.getRootNav().setRoot(CurrentTrainingPage, {trainingId: training.id, trainingIdToSave: currentTraining.id});
+    this.firebaseService.startTraining(currentTraining);
+    this.app.getRootNav().setRoot(CurrentTrainingPage, {trainingId: training.$key, trainingIdToSave: currentTraining.id});
   }
 
   openStartingTrainingMenu() {
@@ -107,8 +107,8 @@ export class JournalPage implements OnInit{
   generateButtonsForTrainings() {
     const buttons = [];
 
-    this.currentJournal.trainings.forEach((element, index) => {
-      if(!this.currentJournal.trainings[index].exercises.length) {
+    this.trainings.forEach((element, index) => {
+      if(!this.trainings[index].exercises.length) {
         return;
       }
       buttons.push(

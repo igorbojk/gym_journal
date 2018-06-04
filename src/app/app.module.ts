@@ -15,7 +15,7 @@ import { JournalServiceProvider } from '../providers/journal-service/journal-ser
 import {TrainingProfilePage} from "../pages/training-profile/training-profile";
 // import {CalendarPage} from "../pages/calendar/calendar";
 import { MomentServiceProvider } from '../providers/moment-service/moment-service';
-// import {CurrentTrainingPage} from "../pages/current-training/current-training";
+import {CurrentTrainingPage} from "../pages/current-training/current-training";
 // import {HistoryTrainingProfilePage} from "../pages/history-training-profile/history-training-profile";
 // import {StatisticPage} from "../pages/statistic/statistic";
 import { StatisticServiceProvider } from '../providers/statistic-service/statistic-service';
@@ -48,7 +48,7 @@ const firebaseConfig = {
     JournalPage,
     TrainingProfilePage,
     // CalendarPage,
-    // CurrentTrainingPage,
+    CurrentTrainingPage,
     // HistoryTrainingProfilePage,
     // StatisticPage
   ],
@@ -73,7 +73,7 @@ const firebaseConfig = {
     JournalPage,
     TrainingProfilePage,
     // CalendarPage,
-    // CurrentTrainingPage,
+    CurrentTrainingPage,
     // HistoryTrainingProfilePage,
     // StatisticPage
   ],

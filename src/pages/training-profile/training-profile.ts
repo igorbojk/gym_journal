@@ -70,6 +70,9 @@ export class TrainingProfilePage implements OnInit {
               if(!this.training.exercises){
                 this.training.exercises = [];
               }
+              for (let i = 1; i <= exercise.repetitionsCount; i++) {
+                exercise.repetitions.push({repetition:0, weight: 0});
+              }
               this.training.exercises.push(exercise);
               this.firebaseService.updateTraining(this.training.$key, this.training);
               this.showToast(`${data.title} добавлен`);

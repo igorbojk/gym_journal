@@ -3,6 +3,7 @@ import {JournalServiceProvider} from "../../providers/journal-service/journal-se
 import {App, NavParams} from "ionic-angular";
 import {TabsPage} from "../tabs/tabs";
 import {Training} from "../../declarations/gym-journal.declaration";
+import {FirebaseServiceProvider} from "../../providers/firebase-service/firebase-service";
 @Component({
   selector: 'page-current-training',
   templateUrl: 'current-training.html',
@@ -15,28 +16,32 @@ export class CurrentTrainingPage implements OnInit{
   currentTraining: Training;
 
   constructor(
-    private journalService: JournalServiceProvider,
     private navParams: NavParams,
     private app: App,
+    private firebaseService: FirebaseServiceProvider
   ) {
 
   }
 
   ngOnInit() {
-    this.trainingId = this.navParams.get('trainingId');
-    this.trainingIdToSave = this.navParams.get('trainingIdToSave');
-    this.setCurrentTraining();
+    this.firebaseService.getTraining(this.navParams.get('trainingId')).subscribe(
+      result => {
+        this.currentTraining = result;
+      }
+    );
   }
 
   stopTraining() {
-    // this.journalService.stopTraining(this.trainingIdToSave, this.currentTraining);
+    this.firebaseService.getCalendar().subscribe(
+      result => {
+        this.trainingIdToSave = result.find(i => i.id == this.navParams.get('trainingIdToSave')).$key;
+        this.currentTraining.stopAt = Date.now();
+        this.firebaseService.stopTraining(this.trainingIdToSave, this.currentTraining);
+      }
+    );
     this.app.getRootNav().setRoot(TabsPage);
-  }
 
-  setCurrentTraining() {
-    // const training = this.journalService.getCurrentTraining(this.trainingId);
-    // this.currentTraining = JSON.parse(JSON.stringify(training));
-    // delete this.currentTraining.id;
+
   }
 
 }
