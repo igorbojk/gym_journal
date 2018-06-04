@@ -12,6 +12,16 @@
 
 <ion-content >
 
+  <button (tap)="addTraining1()">addItem
+  </button>
+  <button (tap)="removeTraining()">removeItem
+  </button>
+
+  <p *ngFor="let item of trainings | async">
+    <span>test</span>
+    <span>{{item}}</span>
+  </p>
+
   <ion-fab bottom right >
     <button ion-fab color="dark" (tap)="addTraining()">
       <ion-icon name="add"></ion-icon>

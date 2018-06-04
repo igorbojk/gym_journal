@@ -23,6 +23,20 @@ import { ChartsModule } from 'ng2-charts';
 import { IonicStorageModule } from '@ionic/storage';
 import { LongPressModule } from 'ionic-long-press';
 
+import {HttpModule} from "@angular/http";
+import {AngularFireDatabaseModule} from "angularfire2/database";
+import {AngularFireModule} from "angularfire2";
+import {FirebaseServiceProvider} from "../providers/firebase-service/firebase-service";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyByBGh2c_eUbXY_yS1KbIvvNRO_lr2oFkw",
+  authDomain: "gymgournal-5ee73.firebaseapp.com",
+  databaseURL: "https://gymgournal-5ee73.firebaseio.com",
+  projectId: "gymgournal-5ee73",
+  storageBucket: "gymgournal-5ee73.appspot.com",
+  messagingSenderId: "948999234749"
+};
+
 @NgModule({
   declarations: [
     MyApp,
@@ -39,10 +53,14 @@ import { LongPressModule } from 'ionic-long-press';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
     ChartsModule,
     IonicStorageModule.forRoot(),
-    LongPressModule
+    LongPressModule,
+    HttpModule,
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    IonicModule.forRoot(MyApp)
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -65,7 +83,8 @@ import { LongPressModule } from 'ionic-long-press';
     UserServiceProvider,
     JournalServiceProvider,
     MomentServiceProvider,
-    StatisticServiceProvider
+    StatisticServiceProvider,
+    FirebaseServiceProvider
   ]
 })
 export class AppModule {}

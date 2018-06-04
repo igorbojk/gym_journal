@@ -4,6 +4,8 @@ import {JournalServiceProvider} from "../../providers/journal-service/journal-se
 import {TrainingProfilePage} from "../training-profile/training-profile";
 import {HistoryTraining, Training} from "../../declarations/gym-journal.declaration";
 import {CurrentTrainingPage} from "../current-training/current-training";
+import {FirebaseServiceProvider} from "../../providers/firebase-service/firebase-service";
+import {FirebaseListObservable} from "angularfire2/database";
 
 
 
@@ -16,18 +18,35 @@ export class JournalPage implements OnInit{
   currentJournal: any;
   activeId: any;
 
+  trainings: FirebaseListObservable<any[]>;
+  newItem = 'test';
+
   constructor(
     private navCtrl: NavController,
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
     private journalService: JournalServiceProvider,
     private actionSheetCtrl: ActionSheetController,
-    private app: App
+    private app: App,
+    public firebaseService: FirebaseServiceProvider
   ) {
 
   }
 
+  getTrainings() {
+    this.trainings = this.firebaseService.getTrainings()
+  }
+
+  addTraining1(){
+    this.firebaseService.addTraining(this.newItem);
+  }
+
+  removeTraining(id) {
+   this.firebaseService.removeTraining(id);
+  }
+
   ngOnInit() {
+    this.getTrainings();
     this.setCurrentJournal();
   }
 
