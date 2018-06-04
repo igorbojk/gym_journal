@@ -12,33 +12,23 @@
 
 <ion-content >
 
-  <button (tap)="addTraining1()">addItem
-  </button>
-  <button (tap)="removeTraining()">removeItem
-  </button>
-
-  <p *ngFor="let item of trainings | async">
-    <span>test</span>
-    <span>{{item}}</span>
-  </p>
-
   <ion-fab bottom right >
     <button ion-fab color="dark" (tap)="addTraining()">
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
 
-  <div class="empty-state" *ngIf="!currentJournal.trainings.length">
+  <div class="empty-state" *ngIf="!trainings.length">
     <div>
       <p>
         У вас еще нет ни одной треннировки.
       </p>
       <p>
-        Для добавления треннировки нажмите "+" вверху экрана.
+        Для добавления треннировки нажмите "+" внизу экрана.
       </p>
     </div>
   </div>
-  <ion-card *ngFor="let training of currentJournal.trainings" (tap)="openTraining(training.id)" ion-long-press [interval]="400" (onPressStart)="longPressed(training)" [ngClass]="{'active': training.id == activeId}">
+  <ion-card *ngFor="let training of trainings" (tap)="openTraining(training.$key)" ion-long-press [interval]="400" (onPressStart)="longPressed(training)" [ngClass]="{'active': training.$key == activeId}">
     <ion-card-header>
       <span>Название:</span>
       {{training.title}}
@@ -49,9 +39,9 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-fab  right top edge *ngIf="currentJournal.trainings.length">
-    <button ion-fab color="danger" (tap)="openStartingTrainingMenu()"><ion-icon name="play"></ion-icon></button>
-  </ion-fab>
+  <!--<ion-fab  right top edge *ngIf="trainings.length">-->
+    <!--<button ion-fab color="danger" (tap)="openStartingTrainingMenu()"><ion-icon name="play"></ion-icon></button>-->
+  <!--</ion-fab>-->
 
 
 </ion-content>

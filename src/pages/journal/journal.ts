@@ -4,8 +4,8 @@ import {JournalServiceProvider} from "../../providers/journal-service/journal-se
 import {TrainingProfilePage} from "../training-profile/training-profile";
 import {HistoryTraining, Training} from "../../declarations/gym-journal.declaration";
 import {CurrentTrainingPage} from "../current-training/current-training";
-import {FirebaseServiceProvider} from "../../providers/firebase-service/firebase-service";
 import {FirebaseListObservable} from "angularfire2/database";
+import {FirebaseServiceProvider} from "../../providers/firebase-service/firebase-service";
 
 
 
@@ -18,14 +18,16 @@ export class JournalPage implements OnInit{
   currentJournal: any;
   activeId: any;
 
-  trainings: FirebaseListObservable<any[]>;
-  newItem = 'test';
+  trainings = [];
 
+  newItem = {
+    title: 'test',
+    exercises: [1,2,3]
+  };
   constructor(
     private navCtrl: NavController,
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
-    private journalService: JournalServiceProvider,
     private actionSheetCtrl: ActionSheetController,
     private app: App,
     public firebaseService: FirebaseServiceProvider
@@ -33,25 +35,18 @@ export class JournalPage implements OnInit{
 
   }
 
-  getTrainings() {
-    this.trainings = this.firebaseService.getTrainings()
-  }
 
-  addTraining1(){
-    this.firebaseService.addTraining(this.newItem);
-  }
-
-  removeTraining(id) {
-   this.firebaseService.removeTraining(id);
-  }
 
   ngOnInit() {
-    this.getTrainings();
-    this.setCurrentJournal();
+    this.firebaseService.getTrainings().subscribe(
+      result => {
+        this.trainings = result;
+      }
+    )
   }
 
   setCurrentJournal() {
-    this.currentJournal = this.journalService.getJournal();
+    // this.currentJournal = this.journalService.getJournal();
   }
 
   showToast(message) {
@@ -86,7 +81,7 @@ export class JournalPage implements OnInit{
               return false;
             }
             const training = new Training(data.title);
-            this.journalService.addTraining(training);
+            this.firebaseService.addTraining(training);
           }
         }
       ]
@@ -95,12 +90,12 @@ export class JournalPage implements OnInit{
   }
 
   openTraining(trainingId) {
-      this.navCtrl.push(TrainingProfilePage, {journalId: this.currentJournal.id, trainingId: trainingId});
+      this.navCtrl.push(TrainingProfilePage, {trainingId: trainingId});
   }
 
   startTraining(training) {
     const currentTraining = new HistoryTraining(training.title);
-    this.journalService.startTraining(currentTraining);
+    // this.journalService.startTraining(currentTraining);
     this.app.getRootNav().setRoot(CurrentTrainingPage, {trainingId: training.id, trainingIdToSave: currentTraining.id});
   }
 
@@ -133,7 +128,7 @@ export class JournalPage implements OnInit{
   }
 
   longPressed(training) {
-    this.activeId = training.id;
+    this.activeId = training.$key;
 
     let actionSheet = this.actionSheetCtrl.create({
       title: '',
@@ -186,8 +181,7 @@ export class JournalPage implements OnInit{
               this.showToast('Введите название');
               return false;
             }
-            this.journalService.renameHistoryTrainings(training.title, data.title);
-            this.journalService.updateTraining(training.id, data);
+            this.firebaseService.updateTraining(training.$key, data);
             this.activeId = null;
           }
         }
@@ -198,7 +192,7 @@ export class JournalPage implements OnInit{
 
   deleteTraining(training) {
     this.navCtrl.popToRoot();
-    this.journalService.deleteTraining(training.id);
+    this.firebaseService.removeTraining(training.$key);
     this.showToast('треннировку удалено');
   }
 

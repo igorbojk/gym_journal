@@ -21,7 +21,7 @@
     </button>
   </ion-fab>
 
-  <div class="empty-state" *ngIf="!training.exercises.length">
+  <div class="empty-state" *ngIf="!training.exercises || !training.exercises.length">
     <div>
       <p>
         У вас еще нет ни одного упражнения.

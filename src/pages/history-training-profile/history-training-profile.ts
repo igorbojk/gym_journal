@@ -26,7 +26,7 @@ export class HistoryTrainingProfilePage implements OnInit{
   }
 
   setHistoryTraining() {
-    this.training = this.journalService.getHistoryTraining(this.trainingId);
+    // this.training = this.journalService.getHistoryTraining(this.trainingId);
   }
 
   getTrainingDate(date) {

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActionSheetController, AlertController, NavController, NavParams, ToastController} from "ionic-angular";
 import {JournalServiceProvider} from "../../providers/journal-service/journal-service";
 import {Exercise} from "../../declarations/gym-journal.declaration";
+import {FirebaseServiceProvider} from "../../providers/firebase-service/firebase-service";
 
 
 @Component({
@@ -12,7 +13,6 @@ export class TrainingProfilePage implements OnInit {
 
   training: any;
 
-  journalId: string;
   trainingId: string;
 
   constructor(
@@ -21,18 +21,23 @@ export class TrainingProfilePage implements OnInit {
     private toastCtrl: ToastController,
     private journalService: JournalServiceProvider,
     public actionSheetCtrl: ActionSheetController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private firebaseService: FirebaseServiceProvider
   ) {
   }
 
   ngOnInit() {
-    this.journalId = this.navParams.get('journalId');
-    this.trainingId = this.navParams.get('trainingId');
     this.setCurrentTraining();
+    this.firebaseService.getTraining(this.navParams.get('trainingId')).subscribe(
+      result => {
+        this.training = result;
+      }
+    );
   }
 
   setCurrentTraining() {
-    this.training = this.journalService.getTraining(this.trainingId);
+
+    // this.training = this.journalService.getTraining(this.trainingId);
   }
 
   addExercise() {
@@ -68,7 +73,7 @@ export class TrainingProfilePage implements OnInit {
                 return false;
               }
               const exercise = new Exercise(data.title, data.repetitionsCount);
-              this.journalService.addExercise(this.trainingId, exercise);
+              // this.journalService.addExercise(this.trainingId, exercise);
               this.showToast(`${data.title} добавлен`);
             }
           }
@@ -121,7 +126,7 @@ export class TrainingProfilePage implements OnInit {
               return false;
             }
             data.repetitionsCount = +data.repetitionsCount;
-            this.journalService.editExercise(this.trainingId, exercise.id, data);
+            // this.journalService.editExercise(this.trainingId, exercise.id, data);
             this.showToast('Сохранено');
           }
         }
@@ -153,7 +158,7 @@ export class TrainingProfilePage implements OnInit {
   }
 
   deleteExercise(exercise) {
-    this.journalService.deleteExercise(this.trainingId, exercise);
+    // this.journalService.deleteExercise(this.trainingId, exercise);
     this.showToast('Упражнение удалено');
   }
 

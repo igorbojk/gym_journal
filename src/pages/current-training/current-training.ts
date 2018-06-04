@@ -29,14 +29,14 @@ export class CurrentTrainingPage implements OnInit{
   }
 
   stopTraining() {
-    this.journalService.stopTraining(this.trainingIdToSave, this.currentTraining);
+    // this.journalService.stopTraining(this.trainingIdToSave, this.currentTraining);
     this.app.getRootNav().setRoot(TabsPage);
   }
 
   setCurrentTraining() {
-    const training = this.journalService.getCurrentTraining(this.trainingId);
-    this.currentTraining = JSON.parse(JSON.stringify(training));
-    delete this.currentTraining.id;
+    // const training = this.journalService.getCurrentTraining(this.trainingId);
+    // this.currentTraining = JSON.parse(JSON.stringify(training));
+    // delete this.currentTraining.id;
   }
 
 }

@@ -5,19 +5,19 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import {LoginPage} from "../pages/login/login";
+// import {LoginPage} from "../pages/login/login";
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import {TabsPage} from "../pages/tabs/tabs";
 import {ProfilePage} from "../pages/profile/profile";
-import {SettingPage} from "../pages/setting/setting";
+// import {SettingPage} from "../pages/setting/setting";
 import {JournalPage} from "../pages/journal/journal";
 import { JournalServiceProvider } from '../providers/journal-service/journal-service';
 import {TrainingProfilePage} from "../pages/training-profile/training-profile";
-import {CalendarPage} from "../pages/calendar/calendar";
+// import {CalendarPage} from "../pages/calendar/calendar";
 import { MomentServiceProvider } from '../providers/moment-service/moment-service';
-import {CurrentTrainingPage} from "../pages/current-training/current-training";
-import {HistoryTrainingProfilePage} from "../pages/history-training-profile/history-training-profile";
-import {StatisticPage} from "../pages/statistic/statistic";
+// import {CurrentTrainingPage} from "../pages/current-training/current-training";
+// import {HistoryTrainingProfilePage} from "../pages/history-training-profile/history-training-profile";
+// import {StatisticPage} from "../pages/statistic/statistic";
 import { StatisticServiceProvider } from '../providers/statistic-service/statistic-service';
 import { ChartsModule } from 'ng2-charts';
 import { IonicStorageModule } from '@ionic/storage';
@@ -27,6 +27,7 @@ import {HttpModule} from "@angular/http";
 import {AngularFireDatabaseModule} from "angularfire2/database";
 import {AngularFireModule} from "angularfire2";
 import {FirebaseServiceProvider} from "../providers/firebase-service/firebase-service";
+import {Network} from "@ionic-native/network";
 
 const firebaseConfig = {
   apiKey: "AIzaSyByBGh2c_eUbXY_yS1KbIvvNRO_lr2oFkw",
@@ -40,16 +41,16 @@ const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    LoginPage,
+    // LoginPage,
     TabsPage,
-    SettingPage,
-    ProfilePage,
+    // SettingPage,
+    // ProfilePage,
     JournalPage,
     TrainingProfilePage,
-    CalendarPage,
-    CurrentTrainingPage,
-    HistoryTrainingProfilePage,
-    StatisticPage
+    // CalendarPage,
+    // CurrentTrainingPage,
+    // HistoryTrainingProfilePage,
+    // StatisticPage
   ],
   imports: [
     BrowserModule,
@@ -65,16 +66,16 @@ const firebaseConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    LoginPage,
+    // LoginPage,
     TabsPage,
-    SettingPage,
-    ProfilePage,
+    // SettingPage,
+    // ProfilePage,
     JournalPage,
     TrainingProfilePage,
-    CalendarPage,
-    CurrentTrainingPage,
-    HistoryTrainingProfilePage,
-    StatisticPage
+    // CalendarPage,
+    // CurrentTrainingPage,
+    // HistoryTrainingProfilePage,
+    // StatisticPage
   ],
   providers: [
     StatusBar,
@@ -83,6 +84,7 @@ const firebaseConfig = {
     UserServiceProvider,
     JournalServiceProvider,
     MomentServiceProvider,
+    Network,
     StatisticServiceProvider,
     FirebaseServiceProvider
   ]

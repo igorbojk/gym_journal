@@ -31,11 +31,9 @@ export interface IHistoryTraining {
 }
 
 export class Training {
-  id: string;
   title: string;
   exercises: IExercise[];
   constructor(title: string) {
-    this.id = Math.random().toString(36).substr(2, 9);
     this.title = title;
     this.exercises = [];
   }

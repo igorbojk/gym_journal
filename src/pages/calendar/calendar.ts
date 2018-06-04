@@ -19,7 +19,7 @@ export class CalendarPage implements OnInit{
   }
 
   ngOnInit() {
-    this.calendar = this.journalService.getCalendarData();
+    // this.calendar = this.journalService.getCalendarData();
   }
 
   getTrainingDate(date) {
