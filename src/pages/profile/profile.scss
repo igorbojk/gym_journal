@@ -1,3 +1,28 @@
 page-profile {
-
+  input{
+    border: none;
+    border-bottom: 1px solid #488aff;
+    padding: 8px;
+    width: 100%;
+    margin-bottom: 8px;
+  }
+  .label{
+    color: rgba(0,0,0,.56);
+    font-size: 12px;
+  }
+  .flex-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 8px 0;
+  }
+  .avatar{
+    width: 126px;
+    height: 126px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin: auto;
+    margin-top: 16px;
+  }
 }

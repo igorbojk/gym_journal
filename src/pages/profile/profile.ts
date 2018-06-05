@@ -6,6 +6,7 @@ import {Storage} from "@ionic/storage";
 import {LoginPage} from "../login/login";
 import {FirebaseServiceProvider} from "../../providers/firebase-service/firebase-service";
 import {Subscription} from "rxjs/Subscription";
+import {TabsPage} from "../tabs/tabs";
 
 
 @Component({
@@ -40,5 +41,16 @@ export class ProfilePage implements OnInit, OnDestroy{
         this.storage.remove('currentUser');
       }
     )
+  }
+
+  updateUserProfile(){
+    this.userService.updateUser(this.currentUser.$key, this.currentUser).then(
+      result => {
+        console.log(result);
+        this.app.getRootNav().setRoot(TabsPage);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 }

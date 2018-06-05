@@ -55,12 +55,16 @@ export class FirebaseServiceProvider {
   }
 
   getUser(id) {
-    return this.angularFireBase.list('/users', {
+    return this.angularFireBase.list('/users/', {
       query: {
         orderByChild: 'id',
         equalTo: id
       }
     });
+  }
+
+  updateUser(id, user) {
+    return this.angularFireBase.list('/users/').update(id, user);
   }
 
 }

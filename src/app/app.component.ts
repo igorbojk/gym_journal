@@ -5,7 +5,7 @@ import {SplashScreen} from '@ionic-native/splash-screen';
 
 import {TabsPage} from "../pages/tabs/tabs";
 import {Storage} from "@ionic/storage";
-import { Network } from '@ionic-native/network';
+import {Network} from '@ionic-native/network';
 import {FirebaseServiceProvider} from "../providers/firebase-service/firebase-service";
 import {Subscription} from "rxjs/Subscription";
 import {LoginPage} from "../pages/login/login";
@@ -14,9 +14,10 @@ import {UserServiceProvider} from "../providers/user-service/user-service";
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp{
+export class MyApp {
   rootPage: any;
   trainingSubscription: Subscription = new Subscription();
+
   constructor(private platform: Platform,
               statusBar: StatusBar,
               splashScreen: SplashScreen,
@@ -32,18 +33,8 @@ export class MyApp{
       statusBar.styleDefault();
       this.storage.get('currentUser').then(
         result => {
-          this.userService.setUser(result);
-          this.rootPage = !result ? LoginPage : TabsPage;
-          this.trainingSubscription = this.firebaseService.getCalendar().subscribe(
-            result => {
-              result.forEach(i => {
-                if(!i.stopAt) {
-                  this.firebaseService.deleteActiveTraining(i.$key);
-                }
-              });
-              this.trainingSubscription.unsubscribe();
-            }
-          );
+          console.log(result);
+          !result || !result.id ? this.goLogin() : this.goTabs(result);
         }
       );
       splashScreen.hide();
@@ -53,6 +44,26 @@ export class MyApp{
       this.openMenu();
     }, 1);
 
+  }
+
+  goLogin() {
+    this.rootPage = LoginPage;
+
+  }
+
+  goTabs(user) {
+    this.rootPage = TabsPage;
+    this.userService.setUser(user);
+    this.trainingSubscription = this.firebaseService.getCalendar().subscribe(
+      result => {
+        result.forEach(i => {
+          if (!i.stopAt) {
+            this.firebaseService.deleteActiveTraining(i.$key);
+          }
+        });
+        this.trainingSubscription.unsubscribe();
+      }
+    );
   }
 
 

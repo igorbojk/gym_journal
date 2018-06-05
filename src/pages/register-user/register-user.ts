@@ -4,6 +4,7 @@ import {UserServiceProvider} from "../../providers/user-service/user-service";
 import {App, NavController} from "ionic-angular";
 import {TabsPage} from "../tabs/tabs";
 import {FirebaseServiceProvider} from "../../providers/firebase-service/firebase-service";
+import {ProfilePage} from "../profile/profile";
 @Component({
   selector: 'page-register-user',
   templateUrl: 'register-user.html',
@@ -14,7 +15,7 @@ export class RegisterUserPage {
     private authService: AuthServiceProvider,
     private userService: UserServiceProvider,
     private navCtrl: NavController,
-    private firebaseService: FirebaseServiceProvider
+    private firebaseService: FirebaseServiceProvider,
   ) {
   }
 
@@ -23,7 +24,7 @@ export class RegisterUserPage {
       this.firebaseService.addUser({id: value.uid}).then(
         result => {
           this.userService.setUser(value);
-          this.navCtrl.setRoot(TabsPage);
+          this.navCtrl.setRoot(ProfilePage);
         },
         err => {
           console.log(err)
