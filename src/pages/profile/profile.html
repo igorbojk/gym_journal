@@ -11,14 +11,14 @@
 
 
   <ion-card>
-    <div class="avatar" [ngStyle]="{backgroundImage: 'url('+currentUser.photoUrl+')'}"></div>
+    <div class="avatar" [ngStyle]="userAvatar"></div>
     <ion-card-content>
       <div class="label">Имя</div>
       <input type="text" [(ngModel)]="currentUser.firstName" placeholder="Имя">
       <div class="label">Фамилия</div>
       <input type="text" [(ngModel)]="currentUser.secondName" placeholder="Фимилия">
-      <div class="label">Аддрес аватарки</div>
-      <input type="text" [(ngModel)]="currentUser.photoUrl" placeholder="Адррес аватарки">
+      <div class="label">Адрес аватарки</div>
+      <input type="text" [(ngModel)]="currentUser.photoUrl" placeholder="Адрес аватарки">
 
       <button ion-button full (tap)="updateUserProfile()">Сохранить</button>
 

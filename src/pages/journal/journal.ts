@@ -5,6 +5,7 @@ import {HistoryTraining, Training} from "../../declarations/gym-journal.declarat
 import {CurrentTrainingPage} from "../current-training/current-training";
 import {FirebaseServiceProvider} from "../../providers/firebase-service/firebase-service";
 import {Subscription} from "rxjs/Subscription";
+import {UserServiceProvider} from "../../providers/user-service/user-service";
 
 
 @Component({
@@ -24,14 +25,15 @@ export class JournalPage implements OnInit, OnDestroy {
               private toastCtrl: ToastController,
               private actionSheetCtrl: ActionSheetController,
               private app: App,
-              public firebaseService: FirebaseServiceProvider) {
+              public firebaseService: FirebaseServiceProvider,
+              private userService: UserServiceProvider) {
   }
 
 
   ngOnInit() {
     this.itemsSubscription = this.firebaseService.getTrainings().subscribe(
       result => {
-        this.trainings = result;
+        this.trainings = result.filter(i => i.userId == this.userService.currentUser.id);
       }
     )
   }
@@ -71,7 +73,7 @@ export class JournalPage implements OnInit, OnDestroy {
               this.showToast('Введите название');
               return false;
             }
-            const training = new Training(data.title);
+            const training = new Training(data.title, this.userService.currentUser.id);
             this.firebaseService.addTraining(training);
           }
         }
@@ -85,7 +87,7 @@ export class JournalPage implements OnInit, OnDestroy {
   }
 
   startTraining(training) {
-    const currentTraining = new HistoryTraining(training.title);
+    const currentTraining = new HistoryTraining(training.title, this.userService.currentUser.id);
     this.firebaseService.startTraining(currentTraining);
     this.app.getRootNav().setRoot(CurrentTrainingPage, {
       trainingId: training.$key,

@@ -34,8 +34,10 @@ export class Training {
   title: string;
   exercises: IExercise[];
   stopAt?: number;
-  constructor(title: string) {
+  userId: string;
+  constructor(title: string, userId: string) {
     this.title = title;
+    this.userId = userId;
     this.exercises = [];
   }
 }
@@ -59,10 +61,12 @@ export class HistoryTraining {
   title: string;
   startAt: number;
   stopAt: number;
-  constructor(title: string) {
+  userId: string;
+  constructor(title: string, userId: string) {
     this.id = Math.random().toString(36).substr(2, 9);
     this.title = title;
     this.startAt = Date.now();
     this.startAt;
+    this.userId = userId;
   }
 }

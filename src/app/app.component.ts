@@ -33,7 +33,6 @@ export class MyApp {
       statusBar.styleDefault();
       this.storage.get('currentUser').then(
         result => {
-          console.log(result);
           !result || !result.id ? this.goLogin() : this.goTabs(result);
         }
       );
@@ -48,22 +47,27 @@ export class MyApp {
 
   goLogin() {
     this.rootPage = LoginPage;
-
   }
 
   goTabs(user) {
-    this.rootPage = TabsPage;
-    this.userService.setUser(user);
-    this.trainingSubscription = this.firebaseService.getCalendar().subscribe(
+    this.userService.setUser(user).subscribe(
       result => {
-        result.forEach(i => {
-          if (!i.stopAt) {
-            this.firebaseService.deleteActiveTraining(i.$key);
+        this.userService.currentUser = result.find(i => i.id === (user.uid || user.id));
+        this.storage.set('currentUser', {id: user.uid || user.id});
+        this.trainingSubscription = this.firebaseService.getCalendar().subscribe(
+          result => {
+            result.forEach(i => {
+              if (!i.stopAt) {
+                this.firebaseService.deleteActiveTraining(i.$key);
+              }
+            });
+            this.trainingSubscription.unsubscribe();
           }
-        });
-        this.trainingSubscription.unsubscribe();
+        );
+        this.rootPage = TabsPage;
       }
     );
+
   }
 
 

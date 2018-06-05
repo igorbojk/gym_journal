@@ -12,12 +12,7 @@ export class UserServiceProvider {
   }
 
   setUser(user) {
-    this.firebaseService.getUser(user.uid || user.id).subscribe(
-      result => {
-        this.currentUser = result.find(i => i.id === (user.uid || user.id));
-        this.storage.set('currentUser', {id: user.uid || user.id});
-      }
-    );
+    return this.firebaseService.getUser(user.uid || user.id);
   }
 
   updateUser(id, user) {

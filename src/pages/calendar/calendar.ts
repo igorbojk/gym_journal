@@ -4,6 +4,7 @@ import {NavController} from "ionic-angular";
 import {HistoryTrainingProfilePage} from "../history-training-profile/history-training-profile";
 import {FirebaseServiceProvider} from "../../providers/firebase-service/firebase-service";
 import {Subscription} from "rxjs/Subscription";
+import {UserServiceProvider} from "../../providers/user-service/user-service";
 @Component({
   selector: 'page-calendar',
   templateUrl: 'calendar.html',
@@ -16,14 +17,15 @@ export class CalendarPage implements OnInit, OnDestroy{
   constructor(
     private momentService: MomentServiceProvider,
     private navCtrl: NavController,
-    public firebaseService: FirebaseServiceProvider
+    public firebaseService: FirebaseServiceProvider,
+    private userService: UserServiceProvider
   ) {
   }
 
   ngOnInit() {
     this.itemsSubscription = this.firebaseService.getCalendar().subscribe(
       result => {
-        this.calendar = result;
+        this.calendar = result.filter(i => i.userId == this.userService.currentUser.id);
       }
     )
   }

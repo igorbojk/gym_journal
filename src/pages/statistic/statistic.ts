@@ -3,6 +3,7 @@ import {StatisticChartColors} from "../../consts/statistic";
 import {FirebaseServiceProvider} from "../../providers/firebase-service/firebase-service";
 import {MomentServiceProvider} from "../../providers/moment-service/moment-service";
 import {Subscription} from "rxjs/Subscription";
+import {UserServiceProvider} from "../../providers/user-service/user-service";
 
 @Component({
   selector: 'page-statistic',
@@ -30,14 +31,15 @@ export class StatisticPage implements OnInit, OnDestroy{
 
   constructor(
     private firebaseService: FirebaseServiceProvider,
-    private momentService: MomentServiceProvider
+    private momentService: MomentServiceProvider,
+    private userService: UserServiceProvider
   ) {
   }
 
   ngOnInit() {
     this.calendarSubscription = this.firebaseService.getCalendar().subscribe(
       result => {
-        this.calendar = result;
+        this.calendar = result.filter(i => i.userId == this.userService.currentUser.id);
         this.calendar.length ? this.viewState = 'view' : this.viewState = 'empty';
         this.generateStatistic();
       }
@@ -64,7 +66,7 @@ export class StatisticPage implements OnInit, OnDestroy{
         if(!result) {
           return;
         }
-        this.trainings = result.filter(i => i.exercises.length);
+        this.trainings = result.filter(i => i.userId == this.userService.currentUser.id).filter(i => i.exercises.length);
         this.generateExercisesMaxWeight();
       }
     );
