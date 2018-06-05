@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {JournalServiceProvider} from "../../providers/journal-service/journal-service";
 import {App, NavParams} from "ionic-angular";
 import {TabsPage} from "../tabs/tabs";
 import {Training} from "../../declarations/gym-journal.declaration";

@@ -47,7 +47,7 @@ export class FirebaseServiceProvider {
   }
 
   deleteActiveTraining(id){
-    return this.angularFireBase.list('/calendar/').remove(id);
+    this.angularFireBase.list('/calendar/').remove(id);
   }
 
 }

@@ -35,7 +35,7 @@ export class MyApp{
             if(!i.stopAt) {
               this.firebaseService.deleteActiveTraining(i.$key);
             }
-          })
+          });
           this.trainingSubscription.unsubscribe();
         }
       );

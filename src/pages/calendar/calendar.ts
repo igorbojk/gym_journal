@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {JournalServiceProvider} from "../../providers/journal-service/journal-service";
 import {MomentServiceProvider} from "../../providers/moment-service/moment-service";
 import {NavController} from "ionic-angular";
 import {HistoryTrainingProfilePage} from "../history-training-profile/history-training-profile";

@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActionSheetController, AlertController, NavController, NavParams, ToastController} from "ionic-angular";
-import {JournalServiceProvider} from "../../providers/journal-service/journal-service";
 import {Exercise} from "../../declarations/gym-journal.declaration";
 import {FirebaseServiceProvider} from "../../providers/firebase-service/firebase-service";
 import {Subscription} from "rxjs/Subscription";
@@ -22,7 +21,6 @@ export class TrainingProfilePage implements OnInit, OnDestroy {
     public navParams: NavParams,
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
-    private journalService: JournalServiceProvider,
     public actionSheetCtrl: ActionSheetController,
     private navCtrl: NavController,
     private firebaseService: FirebaseServiceProvider

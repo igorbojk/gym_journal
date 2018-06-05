@@ -11,7 +11,6 @@ import {TabsPage} from "../pages/tabs/tabs";
 import {ProfilePage} from "../pages/profile/profile";
 import {SettingPage} from "../pages/setting/setting";
 import {JournalPage} from "../pages/journal/journal";
-import { JournalServiceProvider } from '../providers/journal-service/journal-service';
 import {TrainingProfilePage} from "../pages/training-profile/training-profile";
 import {CalendarPage} from "../pages/calendar/calendar";
 import { MomentServiceProvider } from '../providers/moment-service/moment-service';
@@ -81,7 +80,6 @@ const firebaseConfig = {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserServiceProvider,
-    JournalServiceProvider,
     MomentServiceProvider,
     Network,
     FirebaseServiceProvider

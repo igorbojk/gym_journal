@@ -93,7 +93,7 @@ export class StatisticPage implements OnInit, OnDestroy{
     const maxWeightArray = [];
     const filteredTrainings = this.calendar.filter(i => i.title == trainingTitle);
     filteredTrainings.forEach((element) => {
-      if(!element && !element.exercises) {
+      if(!element || !element.exercises) {
         return;
       }
       if(!element.exercises.find(elem => elem.title == exerciseTitle)) {

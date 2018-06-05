@@ -14,7 +14,7 @@
 
 
 <ion-content>
-  <div *ngIf="!calendar" class="empty-state">
+  <div *ngIf="!calendar || !calendar.length" class="empty-state">
     <p>
       Еще не проводилось ни одной треннировки для записей в календаре.
       Проведите треннировку чтобы она отображалась в календаре
