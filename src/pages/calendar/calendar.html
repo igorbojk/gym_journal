@@ -21,7 +21,7 @@
     </p>
   </div>
 
-  <ion-card *ngFor="let training of calendar" (tap)="openTrainingInfo(training.id)">
+  <ion-card *ngFor="let training of calendar" (tap)="openTrainingInfo(training.$key)">
     <ion-card-header>
       <span>Название:</span>
       {{training.title}}

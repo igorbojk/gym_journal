@@ -3,6 +3,7 @@ import {NavParams} from "ionic-angular";
 import {HistoryTraining} from "../../declarations/gym-journal.declaration";
 import {JournalServiceProvider} from "../../providers/journal-service/journal-service";
 import {MomentServiceProvider} from "../../providers/moment-service/moment-service";
+import {FirebaseServiceProvider} from "../../providers/firebase-service/firebase-service";
 
 @Component({
   selector: 'page-history-training-profile',
@@ -10,23 +11,21 @@ import {MomentServiceProvider} from "../../providers/moment-service/moment-servi
 })
 export class HistoryTrainingProfilePage implements OnInit{
 
-  trainingId: string;
-  training: HistoryTraining;
+  training: any;
 
   constructor(
     private navParams: NavParams,
-    private journalService: JournalServiceProvider,
-    private momentService: MomentServiceProvider
+    private momentService: MomentServiceProvider,
+    public firebaseService: FirebaseServiceProvider
   ) {
   }
 
   ngOnInit() {
-    this.trainingId = this.navParams.get('trainingId');
-    this.setHistoryTraining();
-  }
-
-  setHistoryTraining() {
-    // this.training = this.journalService.getHistoryTraining(this.trainingId);
+    this.firebaseService.getHistoryTraining(this.navParams.get('trainingId')).subscribe(
+      result => {
+        this.training = result;
+      }
+    )
   }
 
   getTrainingDate(date) {

@@ -13,10 +13,10 @@ import {ProfilePage} from "../pages/profile/profile";
 import {JournalPage} from "../pages/journal/journal";
 import { JournalServiceProvider } from '../providers/journal-service/journal-service';
 import {TrainingProfilePage} from "../pages/training-profile/training-profile";
-// import {CalendarPage} from "../pages/calendar/calendar";
+import {CalendarPage} from "../pages/calendar/calendar";
 import { MomentServiceProvider } from '../providers/moment-service/moment-service';
 import {CurrentTrainingPage} from "../pages/current-training/current-training";
-// import {HistoryTrainingProfilePage} from "../pages/history-training-profile/history-training-profile";
+import {HistoryTrainingProfilePage} from "../pages/history-training-profile/history-training-profile";
 // import {StatisticPage} from "../pages/statistic/statistic";
 import { StatisticServiceProvider } from '../providers/statistic-service/statistic-service';
 import { ChartsModule } from 'ng2-charts';
@@ -47,9 +47,9 @@ const firebaseConfig = {
     // ProfilePage,
     JournalPage,
     TrainingProfilePage,
-    // CalendarPage,
+    CalendarPage,
     CurrentTrainingPage,
-    // HistoryTrainingProfilePage,
+    HistoryTrainingProfilePage,
     // StatisticPage
   ],
   imports: [
@@ -72,9 +72,9 @@ const firebaseConfig = {
     // ProfilePage,
     JournalPage,
     TrainingProfilePage,
-    // CalendarPage,
+    CalendarPage,
     CurrentTrainingPage,
-    // HistoryTrainingProfilePage,
+    HistoryTrainingProfilePage,
     // StatisticPage
   ],
   providers: [

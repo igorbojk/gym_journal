@@ -36,6 +36,10 @@ export class FirebaseServiceProvider {
     return this.angularFireBase.list('/calendar/');
   }
 
+  getHistoryTraining(id){
+    return this.angularFireBase.object(`/calendar/${id}`)
+  }
+
   stopTraining(saveId, training){
     return this.angularFireBase.list('/calendar/').update(saveId, training);
   }
