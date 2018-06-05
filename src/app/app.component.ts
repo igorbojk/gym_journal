@@ -8,6 +8,8 @@ import {Storage} from "@ionic/storage";
 import { Network } from '@ionic-native/network';
 import {FirebaseServiceProvider} from "../providers/firebase-service/firebase-service";
 import {Subscription} from "rxjs/Subscription";
+import {LoginPage} from "../pages/login/login";
+import {UserServiceProvider} from "../providers/user-service/user-service";
 
 @Component({
   templateUrl: 'app.html'
@@ -20,41 +22,31 @@ export class MyApp{
               splashScreen: SplashScreen,
               private actionSheetCtrl: ActionSheetController,
               private firebaseService: FirebaseServiceProvider,
-              private storage: Storage,
-              private network: Network) {
+              private network: Network,
+              private userService: UserServiceProvider,
+              private storage: Storage) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       // this.storage.clear()
       statusBar.styleDefault();
-
-      this.rootPage = TabsPage;
-      this.trainingSubscription = this.firebaseService.getCalendar().subscribe(
+      this.storage.get('currentUser').then(
         result => {
-          result.forEach(i => {
-            if(!i.stopAt) {
-              this.firebaseService.deleteActiveTraining(i.$key);
+          this.userService.setUser(result);
+          this.rootPage = !result ? LoginPage : TabsPage;
+          this.trainingSubscription = this.firebaseService.getCalendar().subscribe(
+            result => {
+              result.forEach(i => {
+                if(!i.stopAt) {
+                  this.firebaseService.deleteActiveTraining(i.$key);
+                }
+              });
+              this.trainingSubscription.unsubscribe();
             }
-          });
-          this.trainingSubscription.unsubscribe();
+          );
         }
       );
-
       splashScreen.hide();
-      // this.storage.get('journal').then(
-      //   result => {
-      //     !result ?  this.journalService.setDefaultJournal() : this.journalService.setJournal(result);
-      //     this.storage.get('calendar').then(
-      //       calendar => {
-      //         !calendar ?  this.journalService.setDefaultCalendar() : this.journalService.setCalendar(calendar);
-      //         this.journalService.deleteActiveTraining();
-      //         this.rootPage = TabsPage;
-      //         console.log(this.journalService.calendar);
-      //         splashScreen.hide();
-      //       }
-      //     );
-      //   }
-      // );
     });
 
     platform.registerBackButtonAction(() => {

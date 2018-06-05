@@ -50,4 +50,17 @@ export class FirebaseServiceProvider {
     this.angularFireBase.list('/calendar/').remove(id);
   }
 
+  addUser(user){
+    return this.angularFireBase.list('/users/').push(user);
+  }
+
+  getUser(id) {
+    return this.angularFireBase.list('/users', {
+      query: {
+        orderByChild: 'id',
+        equalTo: id
+      }
+    });
+  }
+
 }

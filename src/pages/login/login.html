@@ -2,13 +2,13 @@
 
   <div class="content-block">
     <div>
-      <ion-list>
-        <ion-item>
-          <ion-input type="text" placeholder="Name" #userName></ion-input>
-
-        </ion-item>
-      </ion-list>
-      <button ion-button full (tap)="setUser(userName.value)" [disabled]="!userName.value.length">Okay</button>
+      <ion-input type="text" placeholder="email" #email></ion-input>
+      <ion-input type="text" placeholder="password" #password></ion-input>
+      <button ion-button full (tap)="login(email.value, password.value)">Войти</button>
+      <p>
+        Если у вас еще нет аккаунта, <a (tap)="registerUser()">зарегистрируйтесь</a>.
+      </p>
+      <a (tap)="logout()">logout</a>
     </div>
   </div>
 

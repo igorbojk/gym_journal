@@ -1,31 +1,34 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
+import {BrowserModule} from '@angular/platform-browser';
+import {ErrorHandler, NgModule} from '@angular/core';
+import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
+import {SplashScreen} from '@ionic-native/splash-screen';
+import {StatusBar} from '@ionic-native/status-bar';
 
-import { MyApp } from './app.component';
+import {MyApp} from './app.component';
 import {LoginPage} from "../pages/login/login";
-import { UserServiceProvider } from '../providers/user-service/user-service';
+import {UserServiceProvider} from '../providers/user-service/user-service';
 import {TabsPage} from "../pages/tabs/tabs";
 import {ProfilePage} from "../pages/profile/profile";
 import {SettingPage} from "../pages/setting/setting";
 import {JournalPage} from "../pages/journal/journal";
 import {TrainingProfilePage} from "../pages/training-profile/training-profile";
 import {CalendarPage} from "../pages/calendar/calendar";
-import { MomentServiceProvider } from '../providers/moment-service/moment-service';
+import {MomentServiceProvider} from '../providers/moment-service/moment-service';
 import {CurrentTrainingPage} from "../pages/current-training/current-training";
 import {HistoryTrainingProfilePage} from "../pages/history-training-profile/history-training-profile";
 import {StatisticPage} from "../pages/statistic/statistic";
-import { ChartsModule } from 'ng2-charts';
-import { IonicStorageModule } from '@ionic/storage';
-import { LongPressModule } from 'ionic-long-press';
+import {ChartsModule} from 'ng2-charts';
+import {IonicStorageModule} from '@ionic/storage';
+import {LongPressModule} from 'ionic-long-press';
 
 import {HttpModule} from "@angular/http";
 import {AngularFireDatabaseModule} from "angularfire2/database";
 import {AngularFireModule} from "angularfire2";
 import {FirebaseServiceProvider} from "../providers/firebase-service/firebase-service";
 import {Network} from "@ionic-native/network";
+import {AngularFireAuthModule} from "angularfire2/auth";
+import {AuthServiceProvider} from '../providers/auth-service/auth-service';
+import {RegisterUserPage} from "../pages/register-user/register-user";
 
 const firebaseConfig = {
   apiKey: "AIzaSyByBGh2c_eUbXY_yS1KbIvvNRO_lr2oFkw",
@@ -48,7 +51,8 @@ const firebaseConfig = {
     CalendarPage,
     CurrentTrainingPage,
     HistoryTrainingProfilePage,
-    StatisticPage
+    StatisticPage,
+    RegisterUserPage
   ],
   imports: [
     BrowserModule,
@@ -57,6 +61,7 @@ const firebaseConfig = {
     LongPressModule,
     HttpModule,
     AngularFireDatabaseModule,
+    AngularFireAuthModule,
     AngularFireModule.initializeApp(firebaseConfig),
     IonicModule.forRoot(MyApp)
 
@@ -73,7 +78,8 @@ const firebaseConfig = {
     CalendarPage,
     CurrentTrainingPage,
     HistoryTrainingProfilePage,
-    StatisticPage
+    StatisticPage,
+    RegisterUserPage
   ],
   providers: [
     StatusBar,
@@ -82,7 +88,9 @@ const firebaseConfig = {
     UserServiceProvider,
     MomentServiceProvider,
     Network,
-    FirebaseServiceProvider
+    FirebaseServiceProvider,
+    AuthServiceProvider
   ]
 })
-export class AppModule {}
+export class AppModule {
+}
