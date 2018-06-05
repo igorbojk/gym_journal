@@ -5,11 +5,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-// import {LoginPage} from "../pages/login/login";
+import {LoginPage} from "../pages/login/login";
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import {TabsPage} from "../pages/tabs/tabs";
 import {ProfilePage} from "../pages/profile/profile";
-// import {SettingPage} from "../pages/setting/setting";
+import {SettingPage} from "../pages/setting/setting";
 import {JournalPage} from "../pages/journal/journal";
 import { JournalServiceProvider } from '../providers/journal-service/journal-service';
 import {TrainingProfilePage} from "../pages/training-profile/training-profile";
@@ -17,8 +17,7 @@ import {CalendarPage} from "../pages/calendar/calendar";
 import { MomentServiceProvider } from '../providers/moment-service/moment-service';
 import {CurrentTrainingPage} from "../pages/current-training/current-training";
 import {HistoryTrainingProfilePage} from "../pages/history-training-profile/history-training-profile";
-// import {StatisticPage} from "../pages/statistic/statistic";
-import { StatisticServiceProvider } from '../providers/statistic-service/statistic-service';
+import {StatisticPage} from "../pages/statistic/statistic";
 import { ChartsModule } from 'ng2-charts';
 import { IonicStorageModule } from '@ionic/storage';
 import { LongPressModule } from 'ionic-long-press';
@@ -41,16 +40,16 @@ const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    // LoginPage,
+    LoginPage,
     TabsPage,
-    // SettingPage,
-    // ProfilePage,
+    SettingPage,
+    ProfilePage,
     JournalPage,
     TrainingProfilePage,
     CalendarPage,
     CurrentTrainingPage,
     HistoryTrainingProfilePage,
-    // StatisticPage
+    StatisticPage
   ],
   imports: [
     BrowserModule,
@@ -66,16 +65,16 @@ const firebaseConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    // LoginPage,
+    LoginPage,
     TabsPage,
-    // SettingPage,
-    // ProfilePage,
+    SettingPage,
+    ProfilePage,
     JournalPage,
     TrainingProfilePage,
     CalendarPage,
     CurrentTrainingPage,
     HistoryTrainingProfilePage,
-    // StatisticPage
+    StatisticPage
   ],
   providers: [
     StatusBar,
@@ -85,7 +84,6 @@ const firebaseConfig = {
     JournalServiceProvider,
     MomentServiceProvider,
     Network,
-    StatisticServiceProvider,
     FirebaseServiceProvider
   ]
 })

@@ -1,19 +1,22 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActionSheetController, AlertController, NavController, NavParams, ToastController} from "ionic-angular";
 import {JournalServiceProvider} from "../../providers/journal-service/journal-service";
 import {Exercise} from "../../declarations/gym-journal.declaration";
 import {FirebaseServiceProvider} from "../../providers/firebase-service/firebase-service";
+import {Subscription} from "rxjs/Subscription";
 
 
 @Component({
   selector: 'page-training-profile',
   templateUrl: 'training-profile.html',
 })
-export class TrainingProfilePage implements OnInit {
+export class TrainingProfilePage implements OnInit, OnDestroy {
 
   training: any;
 
   trainingId: string;
+
+  trainingSubscription: Subscription = new Subscription();
 
   constructor(
     public navParams: NavParams,
@@ -27,11 +30,15 @@ export class TrainingProfilePage implements OnInit {
   }
 
   ngOnInit() {
-    this.firebaseService.getTraining(this.navParams.get('trainingId')).subscribe(
+    this.trainingSubscription = this.firebaseService.getTraining(this.navParams.get('trainingId')).subscribe(
       result => {
         this.training = result;
       }
     );
+  }
+
+  ngOnDestroy(){
+    this.trainingSubscription.unsubscribe();
   }
 
   addExercise() {

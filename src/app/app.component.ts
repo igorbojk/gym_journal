@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {ActionSheetController, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
@@ -7,13 +7,14 @@ import {TabsPage} from "../pages/tabs/tabs";
 import {Storage} from "@ionic/storage";
 import { Network } from '@ionic-native/network';
 import {FirebaseServiceProvider} from "../providers/firebase-service/firebase-service";
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp {
+export class MyApp{
   rootPage: any;
-
+  trainingSubscription: Subscription = new Subscription();
   constructor(private platform: Platform,
               statusBar: StatusBar,
               splashScreen: SplashScreen,
@@ -27,15 +28,18 @@ export class MyApp {
       // this.storage.clear()
       statusBar.styleDefault();
 
-      this.network.onDisconnect().subscribe(() => {
-        console.log('network was disconnected :-(');
-      });
-
-      this.network.onConnect().subscribe(() => {
-        console.log('network connected!');
-
-      });
       this.rootPage = TabsPage;
+      this.trainingSubscription = this.firebaseService.getCalendar().subscribe(
+        result => {
+          result.forEach(i => {
+            if(!i.stopAt) {
+              this.firebaseService.deleteActiveTraining(i.$key);
+            }
+          })
+          this.trainingSubscription.unsubscribe();
+        }
+      );
+
       splashScreen.hide();
       // this.storage.get('journal').then(
       //   result => {

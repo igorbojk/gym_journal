@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import {AngularFireDatabase} from "angularfire2/database";
 import {Observable} from "rxjs/Observable";
 
+let test = false;
+
 @Injectable()
 export class FirebaseServiceProvider {
 
@@ -42,6 +44,10 @@ export class FirebaseServiceProvider {
 
   stopTraining(saveId, training){
     return this.angularFireBase.list('/calendar/').update(saveId, training);
+  }
+
+  deleteActiveTraining(id){
+    return this.angularFireBase.list('/calendar/').remove(id);
   }
 
 }

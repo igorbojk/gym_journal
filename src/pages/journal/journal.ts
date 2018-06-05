@@ -1,48 +1,43 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActionSheetController, AlertController, App, NavController, ToastController} from "ionic-angular";
-import {JournalServiceProvider} from "../../providers/journal-service/journal-service";
 import {TrainingProfilePage} from "../training-profile/training-profile";
 import {HistoryTraining, Training} from "../../declarations/gym-journal.declaration";
 import {CurrentTrainingPage} from "../current-training/current-training";
-import {FirebaseListObservable} from "angularfire2/database";
 import {FirebaseServiceProvider} from "../../providers/firebase-service/firebase-service";
-
+import {Subscription} from "rxjs/Subscription";
 
 
 @Component({
   selector: 'page-journal',
   templateUrl: 'journal.html',
 })
-export class JournalPage implements OnInit{
+export class JournalPage implements OnInit, OnDestroy {
 
-  currentJournal: any;
   activeId: any;
 
   trainings = [];
 
-  newItem = {
-    title: 'test',
-    exercises: [1,2,3]
-  };
-  constructor(
-    private navCtrl: NavController,
-    private alertCtrl: AlertController,
-    private toastCtrl: ToastController,
-    private actionSheetCtrl: ActionSheetController,
-    private app: App,
-    public firebaseService: FirebaseServiceProvider
-  ) {
+  itemsSubscription: Subscription = new Subscription();
 
+  constructor(private navCtrl: NavController,
+              private alertCtrl: AlertController,
+              private toastCtrl: ToastController,
+              private actionSheetCtrl: ActionSheetController,
+              private app: App,
+              public firebaseService: FirebaseServiceProvider) {
   }
 
 
-
   ngOnInit() {
-    this.firebaseService.getTrainings().subscribe(
+    this.itemsSubscription = this.firebaseService.getTrainings().subscribe(
       result => {
         this.trainings = result;
       }
     )
+  }
+
+  ngOnDestroy() {
+    this.itemsSubscription.unsubscribe();
   }
 
   showToast(message) {
@@ -72,7 +67,7 @@ export class JournalPage implements OnInit{
         {
           text: 'Сохранить',
           handler: (data) => {
-            if(!data.title.length) {
+            if (!data.title.length) {
               this.showToast('Введите название');
               return false;
             }
@@ -86,13 +81,16 @@ export class JournalPage implements OnInit{
   }
 
   openTraining(trainingId) {
-      this.navCtrl.push(TrainingProfilePage, {trainingId: trainingId});
+    this.navCtrl.push(TrainingProfilePage, {trainingId: trainingId});
   }
 
   startTraining(training) {
     const currentTraining = new HistoryTraining(training.title);
     this.firebaseService.startTraining(currentTraining);
-    this.app.getRootNav().setRoot(CurrentTrainingPage, {trainingId: training.$key, trainingIdToSave: currentTraining.id});
+    this.app.getRootNav().setRoot(CurrentTrainingPage, {
+      trainingId: training.$key,
+      trainingIdToSave: currentTraining.id
+    });
   }
 
   openStartingTrainingMenu() {
@@ -108,7 +106,7 @@ export class JournalPage implements OnInit{
     const buttons = [];
 
     this.trainings.forEach((element, index) => {
-      if(!this.trainings[index].exercises.length) {
+      if (!this.trainings[index].exercises.length) {
         return;
       }
       buttons.push(
@@ -173,7 +171,7 @@ export class JournalPage implements OnInit{
         {
           text: 'Сохранить',
           handler: (data) => {
-            if(!data.title.length) {
+            if (!data.title.length) {
               this.showToast('Введите название');
               return false;
             }
@@ -191,7 +189,6 @@ export class JournalPage implements OnInit{
     this.firebaseService.removeTraining(training.$key);
     this.showToast('треннировку удалено');
   }
-
 
 
 }
